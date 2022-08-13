@@ -1,13 +1,12 @@
 import { NextSeoProps } from "next-seo/lib/types";
 
-// const keywords = "Heightened Exposure, Heightened, Exposure, drone, drone photography, aerial photography, drone recreation, ";
-const companyTitle = "Heightened Exposure";
+const companyTitle = "Company Title";
 const seoDescription = "";
-const siteURL = "https://www.heightenedexpo.com/";
+const siteURL = "https://www.example.com/";
 
 export const SEOConfig: NextSeoProps = {
   defaultTitle: companyTitle,
-  description: "Professional Aerial Drone Photography",
+  description: "Company Description",
   twitter: {
     cardType: "summary_large_image",
     // handle: "",

@@ -32,7 +32,7 @@ export const NAV_ITEMS: Array<NavItemProps> = [
       },
       {
         label: "Why",
-        subLabel: "Professional Drones",
+        subLabel: "Why we do this",
         href: "/about/#why",
       },
     ],
@@ -102,3 +102,11 @@ export const getFormattedDate = () => {
 
   return month + "/" + day + "/" + year;
 };
+
+// export const getCMM = (cookies: string | undefined) => {
+//   const cmm =
+//     typeof cookies === "string"
+//       ? cookieStorageManagerSSR(cookies)
+//       : localStorageManager;
+//   return cmm;
+// };

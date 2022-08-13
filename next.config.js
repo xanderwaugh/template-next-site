@@ -2,9 +2,6 @@
 /**
  * @type {import('next').NextConfig}
  */
-const {
-  PHASE_DEVELOPMENT_SERVER,
-} = require("next/constants");
 
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
@@ -20,14 +17,11 @@ const securityHeaders = [
  * @typedef NextConfig
  */
 module.exports = async () => {
-  // * DEV OPTIONS
   return {
-    poweredByHeader: false,
-    trailingSlash: true,
     images: {
       domains: [
-        "heightenedexpo.s3.amazonaws.com",
-        "d24dg2ixwger2q.cloudfront.net",
+        // "s3.amazonaws.com",
+        // "cloudfront.net",
       ],
     },
     async headers() {
@@ -36,6 +30,9 @@ module.exports = async () => {
       ];
     },
     // ? experimental
+    reactStrictMode: true,
+    poweredByHeader: false,
+    trailingSlash: true,
     swcMinify: true,
   };
 };
