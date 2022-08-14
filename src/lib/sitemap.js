@@ -2,7 +2,7 @@
 
 // * Next Sitemap Config
 module.exports = {
-  siteUrl: "https://www.heightenedexpo.com/",
+  siteUrl: "https://www.example.com/",
   generateRobotsTxt: true,
   robotsTxtOptions: {
     policies: [{ userAgent: "*", allow: "/" }],

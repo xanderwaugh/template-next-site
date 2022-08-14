@@ -19,17 +19,11 @@ const securityHeaders = [
 module.exports = async () => {
   return {
     images: {
-      domains: [
-        // "s3.amazonaws.com",
-        // "cloudfront.net",
-      ],
+      domains: [],
     },
     async headers() {
-      return [
-        { source: "/:path*", headers: securityHeaders },
-      ];
+      return [{ source: "/:path*", headers: securityHeaders }];
     },
-    // ? experimental
     reactStrictMode: true,
     poweredByHeader: false,
     trailingSlash: true,

@@ -1,9 +1,9 @@
 /.env.local
 /.next
 /.todo
+/.vscode/settings.json
 /*.code-workspace
 /node_modules
 /public/robots.txt
 /public/sitemap-0.xml
 /public/sitemap.xml
-yarn.lock

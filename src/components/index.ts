@@ -1,23 +1,5 @@
-import { Loading } from "./Loading";
 import { StyledImage } from "./StyledImage";
 import { StyledLink } from "./StyledLink";
-import { CustomInput } from "./CustomInput";
-import { theme } from "./theme";
-import {
-  Navbar,
-  Footer,
-  Layout,
-  ColorModeSwitch,
-} from "./Layout/";
+import { Layout } from "./Layout/Layout";
 
-export {
-  Navbar,
-  Footer,
-  Layout,
-  Loading,
-  StyledImage,
-  StyledLink,
-  CustomInput,
-  ColorModeSwitch,
-  theme,
-};
+export { Layout, StyledImage, StyledLink };

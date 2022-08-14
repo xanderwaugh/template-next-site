@@ -7,7 +7,7 @@ declare module "next-auth" {
    */
   interface User extends DefaultSession["user"] {
     /** The user's role. */
-    role: string;
+    role?: string;
   }
   /**
    * Returned by `useSession`, `getSession` and received as a prop on the `SessionProvider` React Context

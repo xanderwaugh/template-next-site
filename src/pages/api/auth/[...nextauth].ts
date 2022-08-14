@@ -1,20 +1,16 @@
 import "dotenv-safe/config";
 import NextAuth from "next-auth";
-import DiscordProvider from "next-auth/providers/discord";
-import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "db/client";
+import GoogleProvider from "next-auth/providers/google";
 
 export default NextAuth({
-  // adapter: PrismaAdapter(prisma),
   providers: [
-    // DiscordProvider({
-    //   clientId: process.env.DISCORD_ID ?? "",
-    //   clientSecret: process.env.DISCORD_SECRET ?? "",
-    // }),
+    GoogleProvider({
+      clientId: process.env.GOOGLE_CLIENT_ID ?? "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET ?? "",
+    }),
   ],
   callbacks: {
-    async session({ session, user }) {
-      session.user.role = user.role;
+    async session({ session }) {
       return session;
     },
   },
@@ -22,13 +18,13 @@ export default NextAuth({
   // It is used to sign cookies and to sign and encrypt JSON Web Tokens, unless
   // a separate secret is defined explicitly for encrypting the JWT.
   // secret: process.env.SECRET,
-  // session: {
-  //   strategy: "jwt",
-  // },
-  // jwt: {
-  // A secret to use for key generation (you should set this explicitly)
-  //   secret: process.env.SECRET,
-  // },
+  session: {
+    strategy: "jwt",
+  },
+  jwt: {
+    // A secret to use for key generation (you should set this explicitly)
+    secret: process.env.SECRET,
+  },
   // Events are useful for logging
   // https://next-auth.js.org/configuration/events
   events: {},

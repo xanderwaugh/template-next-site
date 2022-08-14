@@ -1,29 +1,28 @@
-import { NextPage } from "next";
+import { GetServerSideProps, NextPage } from "next";
 import { useSession, signIn } from "next-auth/react";
-import { Button } from "@chakra-ui/react";
+
+export const getServerSideProps: GetServerSideProps = async () => {
+  return {
+    props: {},
+  };
+};
 
 const IndexPage: NextPage = () => {
   const { data: session, status } = useSession();
 
-  if (
-    status === "loading" ||
-    status === "unauthenticated" ||
-    !session
-  ) {
+  if (status === "loading" || status === "unauthenticated" || !session) {
     return (
       <div>
         <h1>Home Page!</h1>
         <br />
         <h2>You are not logged in!</h2>
-        <Button
-          variant={"solid"}
-          colorScheme={"linkedin"}
+        <button
           onClick={() => {
             signIn();
           }}
         >
           login here
-        </Button>
+        </button>
       </div>
     );
   }

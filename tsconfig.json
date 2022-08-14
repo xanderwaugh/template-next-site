@@ -15,22 +15,10 @@
     "isolatedModules": true,
     "jsx": "preserve",
     "types": ["node"],
-    "plugins": [
-      { "name": "typescript-plugin-css-modules" }
-    ],
+    "plugins": [{ "name": "typescript-plugin-css-modules" }],
     "noUncheckedIndexedAccess": true,
-    "incremental": true,
-
-    "baseUrl": "src",
-    "paths": {
-      "@xanny": ["components/core/index.ts"]
-    }
+    "incremental": true
   },
-  "include": [
-    "next-env.d.ts",
-    "**/*.ts",
-    "**/*.tsx",
-    "src"
-  ],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "src"],
   "exclude": ["node_modules", ".next"]
 }

@@ -31,7 +31,6 @@ export const SEOConfig: NextSeoProps = {
   },
   canonical: siteURL,
   additionalMetaTags: [
-    // { name: "keywords", content: keywords },
     {
       httpEquiv: "x-ua-compatible",
       content: "IE=edge",

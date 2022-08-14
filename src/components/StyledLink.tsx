@@ -14,12 +14,7 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   ...props
 }: StyledLinkProps) => {
   return (
-    <NextLink
-      href={href}
-      className={className}
-      passHref
-      {...props}
-    >
+    <NextLink href={href} className={className} passHref {...props}>
       {children}
     </NextLink>
   );

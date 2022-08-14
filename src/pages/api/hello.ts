@@ -8,7 +8,7 @@ type Data = {
   name: string;
 };
 
-const handler: NextApiHandler = (
+const handler: NextApiHandler = async (
   req: NextApiRequest,
   res: NextApiResponse<Data>
 ) => {

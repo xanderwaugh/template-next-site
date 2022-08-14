@@ -1,31 +1,44 @@
-import React, { ReactNode } from "react";
-import { Navbar, Footer } from "..";
-import styles from "../../styles/Layout/Layout.module.css";
-
-import { ChakraProvider } from "@chakra-ui/react";
-import { theme } from "../theme";
 import Head from "next/head";
+import React, { ReactNode } from "react";
 
 interface LayoutProps {
   children: ReactNode | ReactNode[];
   title?: string;
 }
 
-const Layout: React.FC<LayoutProps> = ({
-  children,
-  title,
-}) => {
+const Layout: React.FC<LayoutProps> = ({ children, title }) => {
   return (
-    <ChakraProvider theme={theme} resetCSS>
+    <>
       {title && (
         <Head>
           <title>{title}</title>
         </Head>
       )}
-      <Navbar />
-      <main className={styles["layout"]}>{children}</main>
-      <Footer />
-    </ChakraProvider>
+      <header>
+        <div
+          style={{
+            height: "72px",
+            backgroundColor: "gray",
+          }}
+        >
+          <h1>Navbar</h1>
+        </div>
+      </header>
+      {/* <Navbar /> */}
+
+      <main
+        style={{
+          paddingTop: "72px",
+          paddingLeft: "24px",
+          paddingRight: "24px",
+          minHeight: "90vh",
+        }}
+      >
+        {children}
+      </main>
+      <footer>footer</footer>
+      {/* <Footer /> */}
+    </>
   );
 };
 

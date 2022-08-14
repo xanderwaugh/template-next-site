@@ -1,16 +1,16 @@
 import "../styles/globals.css";
 import { useRouter } from "next/router";
-import type { AppProps } from "next/app";
+// import type { AppProps } from "next/app";
+import type { AppType } from "next/dist/shared/lib/utils";
 import React, { useState } from "react";
 
-import { SessionProvider } from "next-auth/react";
+import { getSession, SessionProvider } from "next-auth/react";
 
 import {
   QueryClient,
   QueryClientProvider,
   Hydrate,
 } from "@tanstack/react-query";
-// import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 
 import { DefaultSeo } from "next-seo";
 import { SEOConfig } from "../lib/seoConfig";
@@ -19,10 +19,7 @@ import { Layout } from "../components/";
 import "@fontsource/inter";
 import "@fontsource/source-sans-pro";
 
-const MyApp = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppProps) => {
+const MyApp: AppType = ({ Component, pageProps }) => {
   const router = useRouter();
   const [queryClient] = useState(() => new QueryClient());
 
@@ -30,13 +27,10 @@ const MyApp = ({
     <React.StrictMode>
       <DefaultSeo {...SEOConfig} />
       <QueryClientProvider client={queryClient}>
-        <SessionProvider session={session}>
+        <SessionProvider session={pageProps.session}>
           <Hydrate state={pageProps.dehydratedState}>
             <Layout title={Component.displayName}>
-              <Component
-                key={router.asPath}
-                {...pageProps}
-              />
+              <Component key={router.asPath} {...pageProps} />
             </Layout>
           </Hydrate>
         </SessionProvider>
@@ -44,6 +38,14 @@ const MyApp = ({
       </QueryClientProvider>
     </React.StrictMode>
   );
+};
+
+MyApp.getInitialProps = async ({ ctx }) => {
+  return {
+    pageProps: {
+      session: await getSession(ctx),
+    },
+  };
 };
 
 export default MyApp;
