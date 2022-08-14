@@ -1,13 +1,24 @@
-import { GetServerSideProps, NextPage } from "next";
-import { useSession, signIn } from "next-auth/react";
+import {
+  GetServerSideProps,
+  InferGetServerSidePropsType,
+  NextPage,
+} from "next";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 export const getServerSideProps: GetServerSideProps = async () => {
+  const res = await fetch("https://randomuser.me/api");
+  const data = await res.json();
+
   return {
-    props: {},
+    props: {
+      data: data,
+    },
   };
 };
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPage = ({
+  data,
+}: InferGetServerSidePropsType<typeof getServerSideProps>) => {
   const { data: session, status } = useSession();
 
   if (status === "loading" || status === "unauthenticated" || !session) {
@@ -21,7 +32,7 @@ const IndexPage: NextPage = () => {
             signIn();
           }}
         >
-          login here
+          Login
         </button>
       </div>
     );
@@ -32,6 +43,14 @@ const IndexPage: NextPage = () => {
       <h1>Home Page!</h1>
       <br />
       <h2>Hello {session.user?.name}!</h2>
+      <button
+        onClick={() => {
+          signOut();
+        }}
+      >
+        Logout
+      </button>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
     </div>
   );
 };

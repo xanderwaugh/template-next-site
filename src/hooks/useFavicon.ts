@@ -8,8 +8,6 @@ export const useFavicon = (href: string) => {
     link.type = "image/x-icon";
     link.rel = "shortcut icon";
     link.href = href;
-    document
-      .getElementsByTagName("head")[0]
-      .appendChild(link);
+    document.getElementsByTagName("head")[0]?.appendChild(link);
   }, [href]);
 };
