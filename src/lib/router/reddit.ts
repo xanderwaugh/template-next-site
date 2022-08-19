@@ -1,7 +1,9 @@
 import axios from "axios";
 
 const getTopRedditPosts = async () => {
-  const res = await axios.get("https://www.reddit.com/top.json");
+  const res = await axios.get(
+    "https://www.reddit.com/top.json"
+  );
   const data: RedditAPIData = await res.data;
   const posts = data.data.children.map((post) => post.data);
 

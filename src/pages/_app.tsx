@@ -1,6 +1,9 @@
 import "../styles/globals.css";
 import { useRouter } from "next/router";
-import type { AppType, AppPropsType } from "next/dist/shared/lib/utils";
+import type {
+  AppType,
+  AppPropsType,
+} from "next/dist/shared/lib/utils";
 import React, { useState } from "react";
 
 import { SessionProvider } from "next-auth/react";
@@ -33,7 +36,9 @@ const MyApp: AppType = ({
   pageProps: { session, ...pageProps },
 }: AppPropsType) => {
   const router = useRouter();
-  const [queryClient] = useState(() => new QueryClient(defQOpts));
+  const [queryClient] = useState(
+    () => new QueryClient(defQOpts)
+  );
 
   return (
     <React.StrictMode>
@@ -42,7 +47,10 @@ const MyApp: AppType = ({
         <SessionProvider session={session}>
           <Hydrate state={pageProps.dehydratedState}>
             <Layout title={Component.displayName}>
-              <Component key={router.asPath} {...pageProps} />
+              <Component
+                key={router.asPath}
+                {...pageProps}
+              />
             </Layout>
           </Hydrate>
         </SessionProvider>

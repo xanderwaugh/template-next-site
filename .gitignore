@@ -1,6 +1,5 @@
 /.env.local
 /.next
-/.todo
 /.vscode/settings.json
 /*.code-workspace
 /node_modules

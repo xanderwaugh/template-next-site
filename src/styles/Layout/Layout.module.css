@@ -1,0 +1,17 @@
+/* .light-theme {
+  background: #edf2f7;
+  color: #1a202c;
+}
+
+.dark-theme {
+  background-color: #212121;
+  color: rgba(255, 255, 255, 0.92);
+} */
+
+.layout {
+  /* padding-top: 60px; */
+  padding-top: 72px;
+  padding-left: 24px;
+  padding-right: 24px;
+  min-height: 90vh;
+}

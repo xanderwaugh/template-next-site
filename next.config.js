@@ -27,6 +27,7 @@ module.exports = async () => {
     reactStrictMode: true,
     poweredByHeader: false,
     trailingSlash: true,
-    swcMinify: true,
+    // swcMinify: true,
+    optimizeFonts: false,
   };
 };
