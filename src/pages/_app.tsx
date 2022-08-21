@@ -1,12 +1,8 @@
 import "../styles/globals.css";
 import { useRouter } from "next/router";
-import type {
-  AppType,
-  AppPropsType,
-} from "next/dist/shared/lib/utils";
+import type { AppType, AppPropsType } from "next/dist/shared/lib/utils";
 import React, { useState } from "react";
 
-import { SessionProvider } from "next-auth/react";
 import {
   QueryClient,
   QueryClientProvider,
@@ -26,34 +22,23 @@ const defQOpts: QueryClientConfig = {
     queries: {
       refetchOnMount: false,
       refetchOnWindowFocus: false,
-      refetchInterval: false,
     },
   },
 };
 
-const MyApp: AppType = ({
-  Component,
-  pageProps: { session, ...pageProps },
-}: AppPropsType) => {
+const MyApp: AppType = ({ Component, pageProps }: AppPropsType) => {
   const router = useRouter();
-  const [queryClient] = useState(
-    () => new QueryClient(defQOpts)
-  );
+  const [queryClient] = useState(() => new QueryClient(defQOpts));
 
   return (
     <React.StrictMode>
       <DefaultSeo {...SEOConfig} />
       <QueryClientProvider client={queryClient}>
-        <SessionProvider session={session}>
-          <Hydrate state={pageProps.dehydratedState}>
-            <Layout title={Component.displayName}>
-              <Component
-                key={router.asPath}
-                {...pageProps}
-              />
-            </Layout>
-          </Hydrate>
-        </SessionProvider>
+        <Hydrate state={pageProps.dehydratedState}>
+          <Layout title={Component.displayName}>
+            <Component key={router.asPath} {...pageProps} />
+          </Layout>
+        </Hydrate>
         {/* <ReactQueryDevtools /> */}
       </QueryClientProvider>
     </React.StrictMode>

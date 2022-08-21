@@ -39,15 +39,13 @@ const Navbar: React.FC = () => {
         style={{
           zIndex: 10,
           position: "fixed",
-          backgroundColor:
-            colorMode === "light" ? "#fff" : "#121212",
+          backgroundColor: colorMode === "light" ? "#fff" : "#121212",
           color: colorMode === "light" ? "black" : "white",
           borderBottom:
             colorMode === "light"
               ? "1px solid #171923"
               : "1px solid #E2E8F0",
-          boxShadow:
-            "0px 0px 12px -1px rgba(0, 0, 0, 0.35)",
+          boxShadow: "0px 0px 12px -1px rgba(0, 0, 0, 0.35)",
         }}
         className={styles["nav-container"]}
       >
@@ -69,7 +67,7 @@ const DesktopNav: React.FC = () => {
   return (
     <div className={styles.desktopNav}>
       <span className={`${styles["nav-title"]} Header`}>
-        Apex Stats
+        Desktop Navbar
       </span>
       {NAV_ITEMS.map((nav_item) => (
         <DesktopNavItem
@@ -94,7 +92,9 @@ const DesktopNavItem: React.FC<DesktopNavItemProps> = ({
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   useEffect(() => {
+    // Close on rerender
     onClose();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -114,9 +114,7 @@ const DesktopNavItem: React.FC<DesktopNavItemProps> = ({
       <PopoverContent
         zIndex={4}
         width={"16rem"}
-        bgColor={
-          colorMode === "light" ? "#fefefe" : "#212121"
-        }
+        bgColor={colorMode === "light" ? "#fefefe" : "#212121"}
       >
         <PopoverHeader>{label}</PopoverHeader>
         <PopoverCloseButton />
@@ -162,20 +160,17 @@ const DesktopNavItem: React.FC<DesktopNavItemProps> = ({
 };
 
 const MobileNav: React.FC = () => {
+  const { colorMode } = useColorMode();
   const btnRef = useRef<HTMLButtonElement>(null);
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
     <div className={styles.mobileNav}>
       <Button ref={btnRef} onClick={onOpen}>
-        {isOpen ? (
-          <AiOutlineClose size={20} />
-        ) : (
-          <BiMenu size={20} />
-        )}
+        {isOpen ? <AiOutlineClose size={20} /> : <BiMenu size={20} />}
       </Button>
       <span className={`${styles["nav-title"]} Header`}>
-        Apex Stats
+        Mobile Navbar
       </span>
       <div />
       <Drawer
@@ -185,7 +180,10 @@ const MobileNav: React.FC = () => {
         placement="top"
       >
         <DrawerOverlay />
-        <DrawerContent display={"flex"}>
+        <DrawerContent
+          display={"flex"}
+          bg={colorMode === "light" ? "#edf2f7" : "#212121"}
+        >
           <div
             style={{
               width: "20px",
@@ -194,25 +192,18 @@ const MobileNav: React.FC = () => {
           >
             <DrawerCloseButton size={"lg"} />
           </div>
-          <DrawerHeader className={"Header"}>
-            LINKS
-          </DrawerHeader>
+          <DrawerHeader className={"Header"}>LINKS</DrawerHeader>
 
-          <DrawerBody className={styles.mobileNavItems}>
+          <DrawerBody
+          // className={styles.mobileNavItems}
+          >
             {NAV_ITEMS.map((nav_item) => (
-              <MobileNavItem
-                key={`${nav_item.href}-nav`}
-                {...nav_item}
-              />
+              <MobileNavItem key={`${nav_item.href}-nav`} {...nav_item} />
             ))}
           </DrawerBody>
 
           <DrawerFooter>
-            <Button
-              variant="outline"
-              onClick={onClose}
-              bottom={0}
-            >
+            <Button variant="outline" onClick={onClose} bottom={0}>
               Close
             </Button>
           </DrawerFooter>
@@ -222,10 +213,7 @@ const MobileNav: React.FC = () => {
   );
 };
 
-const MobileNavItem: React.FC<NavItemProps> = ({
-  href,
-  label,
-}) => {
+const MobileNavItem: React.FC<NavItemProps> = ({ href, label }) => {
   return (
     <div className={`${styles.mobileNavItem} Header`}>
       <StyledLink href={href}>{label}</StyledLink>
