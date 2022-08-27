@@ -30,7 +30,7 @@
         "jsx": true
       },
       "ecmaVersion": "latest",
-      "project": "tsconfig.json",
+      "project": "./tsconfig.json",
       "sourceType": "module"
     },
     "settings": {
@@ -50,7 +50,13 @@
       "@typescript-eslint/explicit-module-boundary-types": "off",
       "react/prop-types": "off",
       "react/react-in-jsx-scope": "off"
-    }
+    },
+    "ignorePatterns": [
+      "node_modules/",
+      "build/",
+      "dist/"
+    ],
+    "root": true
   },
   "dependencies": {
     "@chakra-ui/react": "^2.2.8",

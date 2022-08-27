@@ -1,60 +1,99 @@
 import React, { useEffect, useRef } from "react";
 import styles from "styles/Layout/Navbar.module.css";
-import { NAV_ITEMS, NavItemProps } from "lib";
-import { AiOutlineClose } from "react-icons/ai";
-import { BiMenu } from "react-icons/bi";
+import { NAV_ITEMS } from "lib";
 import { StyledLink, ColorModeSwitch } from "..";
 import { useMediaQuery } from "lib/hooks";
 import {
   Button,
+  useColorMode,
+  chakra,
+  GridItem,
   Drawer,
   DrawerBody,
   DrawerCloseButton,
   DrawerContent,
-  DrawerFooter,
   DrawerHeader,
   DrawerOverlay,
-  Popover,
-  PopoverBody,
-  PopoverCloseButton,
-  PopoverContent,
-  PopoverHeader,
   useDisclosure,
-  useColorMode,
-  PopoverTrigger,
-  ColorMode,
-  Box,
   VStack,
-  Text,
+  StackDivider,
+  DrawerFooter,
 } from "@chakra-ui/react";
+import { BiMenu } from "react-icons/bi";
+import { FiTwitter } from "react-icons/fi";
+import { FaUserCircle } from "react-icons/fa";
+import { AiFillCaretDown } from "react-icons/ai";
+import { BsKeyboard } from "react-icons/bs";
 
 const Navbar: React.FC = () => {
-  const isDesktop = useMediaQuery("(min-width: 1024px)");
   const { colorMode } = useColorMode();
+  const isDesktop = useMediaQuery("(min-width: 1024px)");
+
+  // Session
 
   return (
     <header>
-      <nav
+      <chakra.nav
         role={"navigation"}
-        style={{
-          zIndex: 10,
-          position: "fixed",
-          backgroundColor: colorMode === "light" ? "#fff" : "#121212",
-          color: colorMode === "light" ? "black" : "white",
-          borderBottom:
-            colorMode === "light"
-              ? "1px solid #171923"
-              : "1px solid #E2E8F0",
-          boxShadow: "0px 0px 12px -1px rgba(0, 0, 0, 0.35)",
-        }}
         className={styles["nav-container"]}
+        backgroundColor={colorMode === "light" ? "#fff" : "#121212"}
+        color={colorMode === "light" ? "black" : "white"}
+        borderBottom={
+          colorMode === "light"
+            ? "1px solid #171923"
+            : "1px solid #E2E8F0"
+        }
+        // base, sm, md, lg, xl
+        // px={["1rem", "1rem", "1rem", "1rem", "12rem"]}
+        px={"1rem"}
       >
-        {isDesktop ? <DesktopNav /> : <MobileNav />}
+        {/* Nav Content */}
+        <GridItem justifySelf={"left"}>
+          {isDesktop ? <DesktopNav /> : <MobileNav />}
+        </GridItem>
 
-        <div>
-          <ColorModeSwitch />
-        </div>
-      </nav>
+        {/* Title */}
+        <GridItem justifySelf={"center"} textAlign={"center"}>
+          <StyledLink href={"/"}>
+            <chakra.a>
+              <chakra.span className={`${styles["nav-title"]} Header`}>
+                {isDesktop && <BsKeyboard size={20} />}
+                Sticky Keys
+              </chakra.span>
+            </chakra.a>
+          </StyledLink>
+        </GridItem>
+
+        {/* Account Stuff */}
+        <GridItem
+          justifySelf={"right"}
+          display={"flex"}
+          flexDir={"row"}
+          alignItems={"center"}
+          justifyContent={"right"}
+          w={"100%"}
+          gap={".5rem"}
+        >
+          <StyledLink href={"/account/"}>
+            <chakra.a>
+              <Button
+                variant={"ghost"}
+                onClick={() => {
+                  //
+                }}
+                display={"flex"}
+                flexDir={"row"}
+                alignItems={"center"}
+                justifyContent={"right"}
+                gap={".5rem"}
+              >
+                <FaUserCircle size={"36px"} />
+                <AiFillCaretDown size={14} />
+              </Button>
+            </chakra.a>
+          </StyledLink>
+        </GridItem>
+      </chakra.nav>
     </header>
   );
 };
@@ -62,161 +101,121 @@ const Navbar: React.FC = () => {
 export { Navbar };
 
 const DesktopNav: React.FC = () => {
-  const { colorMode } = useColorMode();
-
   return (
-    <div className={styles.desktopNav}>
-      <span className={`${styles["nav-title"]} Header`}>
-        Desktop Navbar
-      </span>
+    <>
       {NAV_ITEMS.map((nav_item) => (
-        <DesktopNavItem
-          key={`${nav_item.href}-nav`}
-          colorMode={colorMode}
-          {...nav_item}
-        />
+        <StyledLink href={nav_item.href} key={nav_item.href}>
+          <chakra.a mr={"2rem"}>{nav_item.label}</chakra.a>
+        </StyledLink>
       ))}
-    </div>
+    </>
   );
 };
 
-type DesktopNavItemProps = NavItemProps & {
-  colorMode: ColorMode;
-};
-const DesktopNavItem: React.FC<DesktopNavItemProps> = ({
-  href,
-  label,
-  children,
-  colorMode,
-}) => {
+const MobileNav: React.FC = () => {
   const { isOpen, onOpen, onClose } = useDisclosure();
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const { colorMode } = useColorMode();
 
   useEffect(() => {
-    // Close on rerender
     onClose();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
-    <Popover
-      isOpen={children ? isOpen : false}
-      onOpen={onOpen}
-      onClose={onClose}
-      trigger={children ? "hover" : "click"}
-      placement={"bottom"}
-      isLazy
-    >
-      <PopoverTrigger>
-        <div className={"Header"}>
-          <StyledLink href={href}>{label}</StyledLink>
-        </div>
-      </PopoverTrigger>
-      <PopoverContent
-        zIndex={4}
-        width={"16rem"}
-        bgColor={colorMode === "light" ? "#fefefe" : "#212121"}
+    <>
+      <Button
+        aria-label={"Expand Navigation Menu"}
+        ref={btnRef}
+        onClick={onOpen}
+        variant={"ghost"}
+        colorScheme={colorMode === "light" ? "blackAlpha" : undefined}
+        color={colorMode === "light" ? "black" : "white"}
       >
-        <PopoverHeader>{label}</PopoverHeader>
-        <PopoverCloseButton />
-        <PopoverBody>
-          <VStack align={"start"}>
-            {children &&
-              children.map((child) => (
-                <StyledLink
-                  key={`${child.label}-popover`}
-                  href={child.href}
-                >
-                  <Box
-                    w={"100%"}
-                    cursor={"pointer"}
-                    _hover={{
-                      bg:
-                        colorMode === "light"
-                          ? "rgb(240, 240, 240)"
-                          : "#424242",
-                      textDecoration: "underline",
-                    }}
-                    p={2}
-                    px={4}
-                    rounded={"lg"}
-                  >
-                    {child.label}
-                    <Text
-                      style={{
-                        textIndent: "1rem",
-                      }}
-                      textDecor={"none"}
-                    >
-                      {child.subLabel}{" "}
-                    </Text>
-                  </Box>
-                </StyledLink>
-              ))}
-          </VStack>
-        </PopoverBody>
-      </PopoverContent>
-    </Popover>
-  );
-};
-
-const MobileNav: React.FC = () => {
-  const { colorMode } = useColorMode();
-  const btnRef = useRef<HTMLButtonElement>(null);
-  const { isOpen, onOpen, onClose } = useDisclosure();
-
-  return (
-    <div className={styles.mobileNav}>
-      <Button ref={btnRef} onClick={onOpen}>
-        {isOpen ? <AiOutlineClose size={20} /> : <BiMenu size={20} />}
+        <BiMenu size={20} />
       </Button>
-      <span className={`${styles["nav-title"]} Header`}>
-        Mobile Navbar
-      </span>
-      <div />
       <Drawer
         isOpen={isOpen}
+        placement="left"
         onClose={onClose}
         finalFocusRef={btnRef}
-        placement="top"
+        closeOnEsc={true}
+        isFullHeight={true}
       >
         <DrawerOverlay />
-        <DrawerContent
-          display={"flex"}
-          bg={colorMode === "light" ? "#edf2f7" : "#212121"}
-        >
-          <div
-            style={{
-              width: "20px",
-              height: "20px",
-            }}
+        <DrawerContent>
+          <DrawerHeader
+            mt={".2rem"}
+            className={`${styles["nav-title"]} Header`}
           >
-            <DrawerCloseButton size={"lg"} />
-          </div>
-          <DrawerHeader className={"Header"}>LINKS</DrawerHeader>
+            <BsKeyboard size={20} />
+            Sticky Keys
+          </DrawerHeader>
+          <DrawerCloseButton mt={".6rem"} />
 
-          <DrawerBody
-          // className={styles.mobileNavItems}
-          >
-            {NAV_ITEMS.map((nav_item) => (
-              <MobileNavItem key={`${nav_item.href}-nav`} {...nav_item} />
-            ))}
+          <DrawerBody>
+            <VStack
+              justify={"left"}
+              divider={<StackDivider />}
+              w={"100%"}
+            >
+              <StackDivider w={"100%"} />
+              {NAV_ITEMS.map((nav_item) => (
+                <chakra.div
+                  key={nav_item.href}
+                  w={"100%"}
+                  fontSize={"1.4rem"}
+                >
+                  <StyledLink href={nav_item.href}>
+                    <chakra.a
+                      mr={"2rem"}
+                      textTransform={"uppercase"}
+                      onClick={() => onClose()}
+                    >
+                      {nav_item.label}
+                    </chakra.a>
+                  </StyledLink>
+                </chakra.div>
+              ))}
+              <StackDivider />
+            </VStack>
           </DrawerBody>
 
           <DrawerFooter>
-            <Button variant="outline" onClick={onClose} bottom={0}>
-              Close
-            </Button>
+            <VStack
+              justify={"left"}
+              divider={<StackDivider />}
+              w={"100%"}
+            >
+              <StackDivider w={"100%"} />
+              <chakra.div
+                display={"flex"}
+                flexDir={"row"}
+                justifyContent={"space-between"}
+              >
+                <chakra.div w={"100%"}>
+                  Sticky Keys is a project by
+                  <br />
+                  <StyledLink href="https://twitter.com/xanderwaugh">
+                    <chakra.a
+                      target={"_blank"}
+                      color={"blue.400"}
+                      display={"flex"}
+                      flexDir={"row"}
+                      gap={".2rem"}
+                      alignItems={"center"}
+                      justifyContent={"left"}
+                    >
+                      <FiTwitter /> @xanderwaugh
+                    </chakra.a>
+                  </StyledLink>
+                </chakra.div>
+                <ColorModeSwitch />
+              </chakra.div>
+            </VStack>
           </DrawerFooter>
         </DrawerContent>
       </Drawer>
-    </div>
-  );
-};
-
-const MobileNavItem: React.FC<NavItemProps> = ({ href, label }) => {
-  return (
-    <div className={`${styles.mobileNavItem} Header`}>
-      <StyledLink href={href}>{label}</StyledLink>
-    </div>
+    </>
   );
 };

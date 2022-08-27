@@ -19,7 +19,7 @@ const securityHeaders = [
 module.exports = async () => {
   return {
     images: {
-      domains: [],
+      domains: ["via.placeholder.com"],
     },
     async headers() {
       return [{ source: "/:path*", headers: securityHeaders }];
