@@ -1,6 +1,6 @@
 :root {
-  --font-header: "Inter", sans-serif;
-  --font-body: "Source Sans Pro", sans-serif;
+  --font-header: "Noto Sans", sans-serif;
+  --font-body: "Noto Sans", sans-serif;
 }
 
 html {
@@ -74,32 +74,61 @@ h5 {
   border: 2px solid #ffffff;
   background-color: #6c6a6a;
 }
+
 img,
 picture {
   max-width: 100%;
   display: block;
 }
+
 input,
 button,
 textarea,
 select {
   font: inherit;
 }
+
 canvas {
   width: 100%;
   height: 100%;
 }
+
 button {
   writing-mode: horizontal-tb;
   letter-spacing: normal;
   word-spacing: normal;
   text-align: center;
 }
+
 a {
   background-color: transparent;
   color: inherit;
   text-decoration: inherit;
 }
+
 a:hover {
   text-decoration: underline;
+}
+
+div {
+  -webkit-font-smoothing: antialiased !important;
+  -moz-font-smoothing: grayscale !important;
+}
+
+.pageContainer {
+  display: flex;
+  flex-direction: column;
+  min-height: 90vh;
+  align-items: center;
+  margin-top: 1.5rem;
+  margin-left: 0;
+  margin-right: 0;
+  gap: 2rem;
+}
+
+@media (min-width: 1024px) {
+  .pageContainer {
+    margin-left: 5rem;
+    margin-right: 5rem;
+  }
 }

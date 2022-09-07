@@ -10,7 +10,6 @@ import {
   GridItem,
   Drawer,
   DrawerBody,
-  DrawerCloseButton,
   DrawerContent,
   DrawerHeader,
   DrawerOverlay,
@@ -18,18 +17,18 @@ import {
   VStack,
   StackDivider,
   DrawerFooter,
+  useBreakpoint,
 } from "@chakra-ui/react";
-import { BiMenu } from "react-icons/bi";
+import { BiMenu, BiX } from "react-icons/bi";
 import { FiTwitter } from "react-icons/fi";
-import { FaUserCircle } from "react-icons/fa";
-import { AiFillCaretDown } from "react-icons/ai";
-import { BsKeyboard } from "react-icons/bs";
+import { IconBaseProps } from "react-icons/lib";
+
+export const navbarButtonSizes: IconBaseProps["size"] = "28px";
 
 const Navbar: React.FC = () => {
   const { colorMode } = useColorMode();
   const isDesktop = useMediaQuery("(min-width: 1024px)");
-
-  // Session
+  const breakPoint = useBreakpoint();
 
   return (
     <header>
@@ -38,60 +37,31 @@ const Navbar: React.FC = () => {
         className={styles["nav-container"]}
         backgroundColor={colorMode === "light" ? "#fff" : "#121212"}
         color={colorMode === "light" ? "black" : "white"}
-        borderBottom={
-          colorMode === "light"
-            ? "1px solid #171923"
-            : "1px solid #E2E8F0"
-        }
-        // base, sm, md, lg, xl
-        // px={["1rem", "1rem", "1rem", "1rem", "12rem"]}
-        px={"1rem"}
+        pl={"1rem"}
+        pr={isDesktop ? "5rem" : "1rem"}
       >
-        {/* Nav Content */}
-        <GridItem justifySelf={"left"}>
-          {isDesktop ? <DesktopNav /> : <MobileNav />}
-        </GridItem>
-
-        {/* Title */}
-        <GridItem justifySelf={"center"} textAlign={"center"}>
+        {/* // * Site Title */}
+        <GridItem justifySelf={"left"} textAlign={"center"}>
           <StyledLink href={"/"}>
             <chakra.a>
               <chakra.span className={`${styles["nav-title"]} Header`}>
-                {isDesktop && <BsKeyboard size={20} />}
-                Sticky Keys
+                website-{breakPoint}
               </chakra.span>
             </chakra.a>
           </StyledLink>
         </GridItem>
 
-        {/* Account Stuff */}
+        {/* // * Nav Content */}
         <GridItem
-          justifySelf={"right"}
+          justifySelf={isDesktop ? "center" : "right"}
+          colStart={3}
           display={"flex"}
-          flexDir={"row"}
+          flexDirection={"row"}
+          justifyContent={"space-between"}
           alignItems={"center"}
-          justifyContent={"right"}
-          w={"100%"}
-          gap={".5rem"}
         >
-          <StyledLink href={"/account/"}>
-            <chakra.a>
-              <Button
-                variant={"ghost"}
-                onClick={() => {
-                  //
-                }}
-                display={"flex"}
-                flexDir={"row"}
-                alignItems={"center"}
-                justifyContent={"right"}
-                gap={".5rem"}
-              >
-                <FaUserCircle size={"36px"} />
-                <AiFillCaretDown size={14} />
-              </Button>
-            </chakra.a>
-          </StyledLink>
+          {isDesktop ? <DesktopNav /> : <MobileNav />}
+          {isDesktop && <ColorModeSwitch />}
         </GridItem>
       </chakra.nav>
     </header>
@@ -105,7 +75,12 @@ const DesktopNav: React.FC = () => {
     <>
       {NAV_ITEMS.map((nav_item) => (
         <StyledLink href={nav_item.href} key={nav_item.href}>
-          <chakra.a mr={"2rem"}>{nav_item.label}</chakra.a>
+          <chakra.a
+            // * Desktop Navbar Item Spacing
+            mx={"3rem"}
+          >
+            {nav_item.label}
+          </chakra.a>
         </StyledLink>
       ))}
     </>
@@ -132,7 +107,7 @@ const MobileNav: React.FC = () => {
         colorScheme={colorMode === "light" ? "blackAlpha" : undefined}
         color={colorMode === "light" ? "black" : "white"}
       >
-        <BiMenu size={20} />
+        <BiMenu size={navbarButtonSizes} />
       </Button>
       <Drawer
         isOpen={isOpen}
@@ -141,17 +116,34 @@ const MobileNav: React.FC = () => {
         finalFocusRef={btnRef}
         closeOnEsc={true}
         isFullHeight={true}
+        size={"full"}
       >
         <DrawerOverlay />
         <DrawerContent>
           <DrawerHeader
-            mt={".2rem"}
-            className={`${styles["nav-title"]} Header`}
+            mt={".5rem"}
+            width={"full"}
+            display={"flex"}
+            flexDirection={"row"}
+            justifyContent={"space-between"}
+            alignItems={"center"}
           >
-            <BsKeyboard size={20} />
-            Sticky Keys
+            <ColorModeSwitch />
+            <chakra.span className={`${styles["nav-title"]} Header`}>
+              website
+            </chakra.span>
+            <Button
+              aria-label={"Close Navigation Menu"}
+              onClick={onClose}
+              variant={"ghost"}
+              colorScheme={
+                colorMode === "light" ? "blackAlpha" : undefined
+              }
+              color={colorMode === "light" ? "black" : "white"}
+            >
+              <BiX size={navbarButtonSizes} />
+            </Button>
           </DrawerHeader>
-          <DrawerCloseButton mt={".6rem"} />
 
           <DrawerBody>
             <VStack
@@ -183,34 +175,28 @@ const MobileNav: React.FC = () => {
 
           <DrawerFooter>
             <VStack
-              justify={"left"}
+              justify={"center"}
+              align={"start"}
               divider={<StackDivider />}
               w={"100%"}
             >
-              <StackDivider w={"100%"} />
-              <chakra.div
-                display={"flex"}
-                flexDir={"row"}
-                justifyContent={"space-between"}
-              >
-                <chakra.div w={"100%"}>
-                  Sticky Keys is a project by
-                  <br />
-                  <StyledLink href="https://twitter.com/xanderwaugh">
-                    <chakra.a
-                      target={"_blank"}
-                      color={"blue.400"}
-                      display={"flex"}
-                      flexDir={"row"}
-                      gap={".2rem"}
-                      alignItems={"center"}
-                      justifyContent={"left"}
-                    >
-                      <FiTwitter /> @xanderwaugh
-                    </chakra.a>
-                  </StyledLink>
-                </chakra.div>
-                <ColorModeSwitch />
+              <StackDivider />
+              <chakra.div>
+                This Website Is a Project By
+                <br />
+                <StyledLink href="https://twitter.com/xanderwaugh">
+                  <chakra.a
+                    target={"_blank"}
+                    color={"blue.400"}
+                    display={"flex"}
+                    flexDir={"row"}
+                    gap={".2rem"}
+                    alignItems={"center"}
+                    justifyContent={"left"}
+                  >
+                    <FiTwitter /> @xanderwaugh
+                  </chakra.a>
+                </StyledLink>
               </chakra.div>
             </VStack>
           </DrawerFooter>

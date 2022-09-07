@@ -1,16 +1,15 @@
+import { config } from "dotenv-safe";
+if (!process.env.VERCEL) config();
+
 import type {
   NextApiHandler,
   NextApiRequest,
   NextApiResponse,
 } from "next";
 
-type Data = {
-  name: string;
-};
-
 const handler: NextApiHandler = async (
   req: NextApiRequest,
-  res: NextApiResponse<Data>
+  res: NextApiResponse
 ) => {
   return res.status(200).json({ name: "John Doe" });
 };

@@ -1,8 +1,3 @@
-/* eslint-disable @typescript-eslint/no-var-requires */
-/**
- * @type {import('next').NextConfig}
- */
-
 const securityHeaders = [
   { key: "X-DNS-Prefetch-Control", value: "on" },
   { key: "X-XSS-Protection", value: "1; mode=block" },
@@ -12,22 +7,20 @@ const securityHeaders = [
   // 31536000 = 365 days, 2678000 = 31 days
 ];
 
-/*
- * Next Config Options
- * @typedef NextConfig
- */
-module.exports = async () => {
-  return {
-    images: {
-      domains: ["via.placeholder.com"],
-    },
-    async headers() {
-      return [{ source: "/:path*", headers: securityHeaders }];
-    },
-    reactStrictMode: true,
-    poweredByHeader: false,
-    trailingSlash: true,
-    // swcMinify: true,
-    optimizeFonts: false,
-  };
+/** @type {import("next").NextConfig } */
+const nextConfig = {
+  images: {
+    domains: ["via.placeholder.com", "source.unsplash.com"],
+    formats: ["image/avif", "image/webp"],
+  },
+  // async headers() {
+  //   return [{ source: "/:path*", headers: securityHeaders }];
+  // },
+  reactStrictMode: true,
+  poweredByHeader: false,
+  trailingSlash: true,
+  swcMinify: false, // ? true
+  optimizeFonts: false,
 };
+
+module.exports = nextConfig;

@@ -3,6 +3,7 @@ import { BiMoon } from "react-icons/bi";
 import { ImSun } from "react-icons/im";
 import { useColorMode } from "@chakra-ui/react";
 import { Button } from "@chakra-ui/react";
+import { navbarButtonSizes } from "./Navbar";
 
 const ColorModeSwitch: React.FC = () => {
   const { toggleColorMode, colorMode } = useColorMode();
@@ -11,11 +12,12 @@ const ColorModeSwitch: React.FC = () => {
     <Button
       aria-label={"Toggle Contrast"}
       onClick={toggleColorMode}
+      variant={"ghost"}
     >
       {colorMode === "light" ? (
-        <BiMoon size={20} />
+        <BiMoon size={navbarButtonSizes} />
       ) : (
-        <ImSun size={20} />
+        <ImSun size={navbarButtonSizes} />
       )}
     </Button>
   );

@@ -1,34 +1,40 @@
 import React from "react";
-import NextImage, { ImageProps } from "next/image";
+import NextImage, { ImageProps, StaticImageData } from "next/image";
 
-interface StyledImageProps extends ImageProps {
-  src: string;
+interface StyledImageProps {
+  src: string | StaticImageData;
   alt: string;
-  width: string | number;
-  height: string | number;
+  imageProps?: ImageProps;
 }
 
 const StyledImage: React.FC<StyledImageProps> = ({
   src,
   alt,
-  width,
-  height,
-  ...props
+  imageProps,
 }) => {
   return (
-    <NextImage
+    <div
       style={{
-        position: "relative",
+        margin: "auto auto",
+        width: "100%",
+        height: "100%",
+        display: "grid",
       }}
-      objectFit={"cover"}
-      // layout={"fill"}
-      // layout={"responsive"}
-      src={src}
-      alt={alt}
-      width={width}
-      height={height}
-      {...props}
-    />
+    >
+      <NextImage
+        src={src}
+        alt={alt}
+        layout={"responsive"}
+        objectFit={"contain"}
+        objectPosition={"center"}
+        width={typeof src === "string" ? "100%" : src.width}
+        height={typeof src === "string" ? "100%" : src.height}
+        placeholder={"empty"}
+        loading={"lazy"}
+        // blurDataURL={"/placeholder.png"}
+        {...imageProps}
+      />
+    </div>
   );
 };
 
