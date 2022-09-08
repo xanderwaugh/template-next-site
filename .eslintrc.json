@@ -15,7 +15,8 @@
   "settings": {
     "react": {
       "version": "detect"
-    }
+    },
+    "project": "./tsconfig.json"
   },
   "plugins": ["@typescript-eslint"],
   "extends": [
@@ -28,6 +29,5 @@
     "dist/",
     ".next/"
   ],
-  "root": true,
-  "project": "./tsconfig.json"
+  "root": true
 }

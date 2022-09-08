@@ -1,6 +1,6 @@
 import { NextPage } from "next";
 import React from "react";
-import { Button, chakra, Heading } from "@chakra-ui/react";
+import { Button, Heading } from "@chakra-ui/react";
 
 const IndexPage: NextPage = () => {
   return (
@@ -18,6 +18,6 @@ const IndexPage: NextPage = () => {
   );
 };
 
-IndexPage.displayName = "site home";
+IndexPage.displayName = "Home";
 
 export default IndexPage;
