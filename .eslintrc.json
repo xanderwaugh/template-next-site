@@ -22,6 +22,12 @@
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals"
   ],
-  "ignorePatterns": ["node_modules/", "build/", "dist/", ".next/"],
-  "root": true
+  "ignorePatterns": [
+    "node_modules/",
+    "build/",
+    "dist/",
+    ".next/"
+  ],
+  "root": true,
+  "project": "./tsconfig.json"
 }

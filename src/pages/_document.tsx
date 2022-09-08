@@ -15,6 +15,8 @@ class MyDocument extends Document {
         <body>
           <ColorModeScript
             initialColorMode={theme.config.initialColorMode}
+            type={"cookie"}
+            storageKey={"color-mode"}
           />
           <Main />
           <NextScript />

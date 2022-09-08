@@ -1,11 +1,8 @@
 import React, { ReactNode } from "react";
 import { Navbar, Footer } from "..";
 import { SEOConfig } from "lib/seoConfig";
-
-import { ChakraProvider } from "@chakra-ui/react";
-
-import { theme } from "../theme";
 import Head from "next/head";
+import { chakra } from "@chakra-ui/react";
 
 interface LayoutProps {
   children: ReactNode | ReactNode[];
@@ -17,20 +14,14 @@ const Layout: React.FC<LayoutProps> = ({
   title = SEOConfig.defaultTitle,
 }) => {
   return (
-    <ChakraProvider theme={theme} resetCSS>
+    <>
       <Head>
         <title>{title}</title>
       </Head>
       <Navbar />
-      <main
-        style={{
-          paddingTop: "64px",
-        }}
-      >
-        {children}
-      </main>
+      <chakra.main pt={"64px"}>{children}</chakra.main>
       <Footer />
-    </ChakraProvider>
+    </>
   );
 };
 
