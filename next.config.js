@@ -19,7 +19,7 @@ const nextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   trailingSlash: true,
-  swcMinify: false, // ? true
+  swcMinify: true,
   optimizeFonts: false,
 };
 

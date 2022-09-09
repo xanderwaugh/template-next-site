@@ -1,23 +1,30 @@
-import { NextPage } from "next";
 import React from "react";
-import { Button, Heading } from "@chakra-ui/react";
+import type { NextPageWithLayout } from "types/layout";
+import { Box, Button, Heading } from "@chakra-ui/react";
+import Colors from "../../public/colors.jpeg";
+import { StyledImage } from "components";
 
-const IndexPage: NextPage = () => {
+const IndexPage: NextPageWithLayout = () => {
   return (
-    <div className={"pageContainer"}>
-      {/* // * Landing Page Section */}
+    <Box className={"pageContainer"}>
+      <StyledImage src={Colors} alt={"Colored Image"} />
+
       <Heading as={"h1"} size={"2xl"}>
         Content
       </Heading>
       <Heading as={"h2"} size={"xl"}>
-        {/* {data?.greeting ?? "no greeitng"} */}
         More Content
       </Heading>
       <Button size={"lg"}>HERO Button</Button>
-    </div>
+    </Box>
   );
 };
 
+IndexPage.getLayout = (page) => (
+  <div>
+    <Box>{page}</Box>
+  </div>
+);
 IndexPage.displayName = "Home";
 
 export default IndexPage;

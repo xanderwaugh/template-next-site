@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useState, useEffect } from "react";
 
 export const useFetch = (url: string) => {
@@ -8,20 +7,16 @@ export const useFetch = (url: string) => {
   useEffect(() => {
     // setData((oldData) => oldData);
     setLoading(true);
-    axios
-      .get(url)
-      .then((res) => res.data)
+
+    fetch(url)
+      .then((res) => res.json())
       .then((data) => {
         setData(data);
         setLoading(false);
       })
       .catch(() => {
-        // err: Error
         setLoading(false);
-        setData({
-          error: "Error fetching data",
-        });
-        // error: err.message,
+        setData({ error: "Error fetching data" });
       });
   }, [url, setData, setLoading]);
 
