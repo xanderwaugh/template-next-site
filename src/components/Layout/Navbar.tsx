@@ -18,12 +18,14 @@ import {
   StackDivider,
   DrawerFooter,
   useBreakpoint,
+  Link,
 } from "@chakra-ui/react";
 import { BiMenu, BiX } from "react-icons/bi";
 import { FiTwitter } from "react-icons/fi";
 import { IconBaseProps } from "react-icons/lib";
 
-export const navbarButtonSizes: IconBaseProps["size"] = "28px";
+export const navbarButtonSizes: IconBaseProps["size"] =
+  "28px";
 
 const Navbar: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -34,20 +36,31 @@ const Navbar: React.FC = () => {
     <header>
       <chakra.nav
         role={"navigation"}
-        className={styles["nav-container"]}
-        backgroundColor={colorMode === "light" ? "#fff" : "#121212"}
+        zIndex={10}
+        position={"fixed"}
+        width={"100%"}
+        height={"4rem"}
+        boxShadow={"md"}
+        display={"grid"}
+        gridTemplateColumns={"repeat(3, 1fr)"}
+        gap={"1rem"}
+        placeContent={"center"}
+        alignItems={"center"}
+        justifyContent={"space-between"}
+        backgroundColor={
+          colorMode === "light" ? "#fff" : "#121212"
+        }
         color={colorMode === "light" ? "black" : "white"}
         pl={"1rem"}
         pr={isDesktop ? "5rem" : "1rem"}
+        className={styles["navContainer"]}
       >
         {/* // * Site Title */}
         <GridItem justifySelf={"left"} textAlign={"center"}>
           <StyledLink href={"/"}>
-            <chakra.a>
-              <chakra.span className={`${styles["nav-title"]} Header`}>
-                website-{breakPoint}
-              </chakra.span>
-            </chakra.a>
+            <Link className={`${styles["navTitle"]}`}>
+              website-{breakPoint}
+            </Link>
           </StyledLink>
         </GridItem>
 
@@ -74,7 +87,10 @@ const DesktopNav: React.FC = () => {
   return (
     <>
       {NAV_ITEMS.map((nav_item) => (
-        <StyledLink href={nav_item.href} key={nav_item.href}>
+        <StyledLink
+          href={nav_item.href}
+          key={nav_item.href}
+        >
           <chakra.a
             // * Desktop Navbar Item Spacing
             mx={"3rem"}
@@ -104,7 +120,9 @@ const MobileNav: React.FC = () => {
         ref={btnRef}
         onClick={onOpen}
         variant={"ghost"}
-        colorScheme={colorMode === "light" ? "blackAlpha" : undefined}
+        colorScheme={
+          colorMode === "light" ? "blackAlpha" : undefined
+        }
         color={colorMode === "light" ? "black" : "white"}
       >
         <BiMenu size={navbarButtonSizes} />
@@ -129,7 +147,9 @@ const MobileNav: React.FC = () => {
             alignItems={"center"}
           >
             <ColorModeSwitch />
-            <chakra.span className={`${styles["nav-title"]} Header`}>
+            <chakra.span
+              className={`${styles["navTitle"]}`}
+            >
               website
             </chakra.span>
             <Button
@@ -137,9 +157,13 @@ const MobileNav: React.FC = () => {
               onClick={onClose}
               variant={"ghost"}
               colorScheme={
-                colorMode === "light" ? "blackAlpha" : undefined
+                colorMode === "light"
+                  ? "blackAlpha"
+                  : undefined
               }
-              color={colorMode === "light" ? "black" : "white"}
+              color={
+                colorMode === "light" ? "black" : "white"
+              }
             >
               <BiX size={navbarButtonSizes} />
             </Button>

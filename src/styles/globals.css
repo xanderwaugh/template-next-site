@@ -1,12 +1,31 @@
+/* * Global styles */
 :root {
-  --font-header: "Noto Sans", sans-serif;
+  /* * Fonts */
   --font-body: "Noto Sans", sans-serif;
+  --font-header: "Noto Sans", sans-serif;
+
+  --fw-regular: 400;
+  --fw-semi-bold: 500;
+  --fw-bold: 700;
+
+  /* * Colors */
+  --clr-primary-400: hsl(228, 39%, 23%);
+
+  --clr-accent-400: hsl(12, 88%, 59%);
+  --clr-accent-100: hsl(13, 100%, 96%);
+
+  --clr-neutral-100: hsl(232, 12%, 13%);
+  --clr-neutral-900: hsl(0, 0%, 0%);
 }
 
-#__next {
-  height: 100%;
-}
+/* * Breakpoints
+* sm: <=30em (480px)
+* md: <=48em (768px)
+* lg: <=62em (992px)
+* xl: <=80em (1280px)
+*/
 
+/* * CSS RESET */
 *,
 *::before,
 *::after {
@@ -14,14 +33,34 @@
 }
 
 * {
-  box-sizing: border-box;
-  text-rendering: optimizeLegibility;
+  margin: 0;
+  padding: 0;
+  font: inherit;
+  /* line-height: calc(1em + 0.5rem); */
+  line-height: calc(1em + 0.5rem) !important;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+#root,
+#__next {
+  isolation: isolate;
+}
+
+html:focus-within {
+  scroll-behavior: smooth;
+}
+
+body {
+  /* text-rendering: optimizeLegibility; */
+  text-rendering: optimizeSpeed;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   scrollbar-color: #6c6a6a #ffffff;
   scroll-behavior: smooth;
-  margin: 0;
-  padding: 0;
 }
 
 *::-webkit-scrollbar {
@@ -38,21 +77,6 @@
   background-color: #6c6a6a;
 }
 
-html {
-  font-family: var(--font-body);
-}
-
-body {
-  font-family: var(--font-body);
-  text-rendering: optimizeLegibility;
-  line-height: 1.5;
-}
-
-div {
-  -webkit-font-smoothing: antialiased !important;
-  -moz-font-smoothing: grayscale !important;
-}
-
 a {
   background-color: transparent;
   color: inherit;
@@ -63,41 +87,54 @@ a:hover {
   text-decoration: underline;
 }
 
+a:not([class]) {
+  text-decoration-skip-ink: auto;
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+p,
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  overflow-wrap: break-word;
   font-family: var(--font-header);
-  font-weight: 600;
-}
-h1 {
-  font-size: 2.5rem;
-  line-height: 1.2;
-}
-h2 {
-  font-size: 2rem;
-  line-height: 1.2;
-}
-h3 {
-  font-size: 1.5rem;
-  line-height: 1.2;
-}
-h4 {
-  font-size: 1.25rem;
-  line-height: 1.2;
-}
-h5 {
-  font-size: 1rem;
-  line-height: 1.2;
 }
 
-/* Page Container */
+/* 
+  Remove all animations, 
+  transitions and smooth scroll 
+  for people that prefer not to see them 
+*/
+@media (prefers-reduced-motion: reduce) {
+  html:focus-within {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* * Page Container */
 .pageContainer {
   display: flex;
   flex-direction: column;
-  min-height: 90vh;
   align-items: center;
   margin-top: 1.5rem;
   margin-left: 0;
@@ -105,7 +142,7 @@ h5 {
   gap: 2rem;
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 48em) {
   .pageContainer {
     margin-left: 5rem;
     margin-right: 5rem;

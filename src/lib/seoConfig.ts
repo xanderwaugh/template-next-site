@@ -6,7 +6,7 @@ const siteURL = "https://www.example.com/";
 
 export const SEOConfig: NextSeoProps = {
   defaultTitle: companyTitle,
-  description: "Company Description",
+  description: seoDescription,
   twitter: {
     cardType: "summary_large_image",
     // handle: "",
@@ -42,13 +42,11 @@ export const SEOConfig: NextSeoProps = {
     { name: "HandheldFriendly", content: "true" },
     {
       name: "robots",
-      content:
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      content: "index, follow",
     },
     {
       name: "googlebot",
-      content:
-        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
+      content: "index, follow",
     },
     { name: "msapplication-TileColor", content: "#ffffff" },
     { name: "theme-color", content: "#ffffff" },

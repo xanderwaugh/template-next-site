@@ -1,10 +1,12 @@
 import { StyledImage } from "./StyledImage";
 import { StyledLink } from "./StyledLink";
-import { Layout } from "./Layout/Layout";
-import { Navbar } from "./Layout/Navbar";
-import { Footer } from "./Layout/Footer";
-import { ColorModeSwitch } from "./Layout/ColorModeSwitch";
-import theme, { Colors } from "./theme";
+import {
+  Layout,
+  Navbar,
+  Footer,
+  ColorModeSwitch,
+} from "./Layout";
+import { Colors, theme } from "./theme";
 
 export {
   Layout,
