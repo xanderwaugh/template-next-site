@@ -6,7 +6,6 @@ import Document, {
 } from "next/document";
 import { ColorModeScript } from "@chakra-ui/react";
 import { theme } from "../components";
-import Link from "next/link";
 
 class MyDocument extends Document {
   render() {

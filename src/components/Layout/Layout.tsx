@@ -3,8 +3,8 @@ import { ReactNode } from "react";
 import Head from "next/head";
 import { SEOConfig } from "lib/seoConfig";
 
-import { chakra } from "@chakra-ui/react";
-import { Navbar, Footer } from ".";
+import { Box } from "@chakra-ui/react";
+import { Navbar } from ".";
 
 interface LayoutProps {
   children: ReactNode | ReactNode[];
@@ -21,7 +21,9 @@ const Layout: React.FC<LayoutProps> = ({
         <title>{title}</title>
       </Head>
       <Navbar />
-      <chakra.main pt={"64px"}>{children}</chakra.main>
+      <Box as={"main"} pt={"64px"}>
+        {children}
+      </Box>
       {/* <Footer /> */}
     </>
   );

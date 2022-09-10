@@ -8,7 +8,6 @@ import { SEOConfig } from "../lib/seoConfig";
 
 import { ChakraProvider } from "@chakra-ui/react";
 import { Layout, theme } from "../components/";
-// import "@fontsource/noto-sans";
 
 const MyApp = ({
   Component,
