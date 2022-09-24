@@ -12,7 +12,7 @@ const StyledLink: React.FC<StyledLinkProps> = ({
   ...props
 }: StyledLinkProps) => {
   return (
-    <NextLink href={href} passHref {...props}>
+    <NextLink href={href} passHref={true} {...props}>
       {children}
     </NextLink>
   );

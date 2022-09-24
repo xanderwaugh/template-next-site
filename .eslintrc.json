@@ -1,8 +1,4 @@
 {
-  "env": {
-    "es2021": true,
-    "node": true
-  },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
     "ecmaFeatures": {
@@ -10,24 +6,25 @@
     },
     "ecmaVersion": "latest",
     "project": "./tsconfig.json",
-    "sourceType": "module"
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "plugins": [],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "next/core-web-vitals",
+    "plugin:react/recommended",
+    "plugin:react-hooks/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "rules": {
+    "react/react-in-jsx-scope": "off", // Don't Have To Import React
+    "react/prop-types": "off", // No Need To Define PropTypes
+    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
   },
   "settings": {
     "react": {
       "version": "detect"
-    },
-    "project": "./tsconfig.json"
+    }
   },
-  "plugins": ["@typescript-eslint"],
-  "extends": [
-    "plugin:@typescript-eslint/recommended",
-    "next/core-web-vitals"
-  ],
-  "ignorePatterns": [
-    "node_modules/",
-    "build/",
-    "dist/",
-    ".next/"
-  ],
-  "root": true
+  "ignorePatterns": ["node_modules/", "build/", "dist/", ".next/"]
 }

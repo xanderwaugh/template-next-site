@@ -1,22 +1,18 @@
-import { useFetch } from "./useFetch";
 import { useCountRenders } from "./useCountRenders";
 import { useFavicon } from "./useFavicon";
 import { useMediaQuery } from "./useMediaQuery";
+import { useColorMode, ColorMode, ColorModeProvider } from "./useColorMode";
 import { useWindowDimensions } from "./useWindowDimensions";
-import {
-  useColorMode,
-  ColorMode,
-  ColorModeProvider,
-} from "./useColorMode";
+import { useIsDesktop } from "./useDevice";
 
 export {
-  useFetch,
   useCountRenders,
   useFavicon,
   useColorMode,
   ColorModeProvider,
   useMediaQuery,
   useWindowDimensions,
+  useIsDesktop,
 };
 
 export type { ColorMode };

@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 
-export const useMediaQuery = (query: string) => {
+const query = `(min-width: 1024px)`;
+
+export const useIsDesktop = () => {
   const [matches, setMatches] = useState(false);
 
   useEffect(() => {
@@ -11,7 +13,7 @@ export const useMediaQuery = (query: string) => {
     const listener = () => setMatches(media.matches);
     window.addEventListener("resize", listener);
     return () => window.removeEventListener("resize", listener);
-  }, [matches, query]);
+  }, [matches]);
 
   return matches;
 };

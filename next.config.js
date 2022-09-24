@@ -1,26 +1,28 @@
-const securityHeaders = [
-  { key: "X-DNS-Prefetch-Control", value: "on" },
-  { key: "X-XSS-Protection", value: "1; mode=block" },
-  { key: "X-Frame-Options", value: "SAMEORIGIN" },
-  // { key: "X-Content-Type-Options", value: "nosniff" },
-  // { key: "Cache-Control", value: "public, max-age=2678000, immutable", },
-  // 31536000 = 365 days, 2678000 = 31 days
-];
+// @ts-check
+/* eslint-disable @typescript-eslint/no-var-requires */
 
-/** @type {import("next").NextConfig } */
-const nextConfig = {
+/**
+ * Define NextJS Config With Auto Completion.
+ *
+ * @template {import('next').NextConfig} T
+ * @param {T} config - A generic parameter that flows through to the return type
+ * @constraint {{import('next').NextConfig}}
+ */
+function getConfig(config) {
+  return config;
+}
+
+/**
+ * @link https://nextjs.org/docs/api-reference/next.config.js/introduction
+ */
+module.exports = getConfig({
   images: {
-    domains: ["via.placeholder.com", "source.unsplash.com"],
+    domains: [],
     formats: ["image/avif", "image/webp"],
   },
-  // async headers() {
-  //   return [{ source: "/:path*", headers: securityHeaders }];
-  // },
+  trailingSlash: true,
   reactStrictMode: true,
   poweredByHeader: false,
-  trailingSlash: true,
-  swcMinify: true,
   optimizeFonts: false,
-};
-
-module.exports = nextConfig;
+  swcMinify: true,
+});

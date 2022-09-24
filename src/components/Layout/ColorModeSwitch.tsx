@@ -13,7 +13,6 @@ const ColorModeSwitch: React.FC = () => {
       aria-label={"Toggle Contrast"}
       onClick={toggleColorMode}
       variant={"ghost"}
-      // size={"lg"}
     >
       {colorMode === "light" ? (
         <BiMoon size={navbarButtonSizes} />

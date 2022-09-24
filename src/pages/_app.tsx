@@ -1,7 +1,7 @@
 import "../styles/globals.css";
-import React from "react";
+import React, { StrictMode } from "react";
+import { AppProps, AppType } from "next/app";
 import { useRouter } from "next/router";
-import type { AppPropsWithLayout } from "types/layout";
 
 import { DefaultSeo } from "next-seo";
 import { SEOConfig } from "../lib/seoConfig";
@@ -9,25 +9,19 @@ import { SEOConfig } from "../lib/seoConfig";
 import { ChakraProvider } from "@chakra-ui/react";
 import { Layout, theme } from "../components/";
 
-const MyApp = ({
-  Component,
-  pageProps,
-}: AppPropsWithLayout) => {
+const MyApp = (({ Component, pageProps }: AppProps) => {
   const router = useRouter();
-  const getLayout = Component.getLayout || ((page) => page);
 
   return (
-    <React.StrictMode>
+    <StrictMode>
       <DefaultSeo {...SEOConfig} />
       <ChakraProvider theme={theme} resetCSS={true}>
         <Layout title={Component.displayName}>
-          {getLayout(
-            <Component key={router.asPath} {...pageProps} />
-          )}
+          <Component key={router.asPath} {...pageProps} />
         </Layout>
       </ChakraProvider>
-    </React.StrictMode>
+    </StrictMode>
   );
-};
+}) as AppType;
 
 export default MyApp;

@@ -1,9 +1,4 @@
-import React, {
-  createContext,
-  useContext,
-  useEffect,
-  useState,
-} from "react";
+import React, { createContext, useContext, useEffect, useState } from "react";
 
 export type ColorMode = "light" | "dark";
 
@@ -18,9 +13,7 @@ const ColorModeContext = createContext<ContextProps>({
 });
 
 export const useColorMode = () => {
-  const { colorMode, setColorMode } = useContext(
-    ColorModeContext
-  );
+  const { colorMode, setColorMode } = useContext(ColorModeContext);
   return { colorMode, setColorMode };
 };
 
@@ -45,11 +38,8 @@ const setLocalStorage = (newCM: ColorMode) => {
   }
 };
 
-export const ColorModeProvider: React.FC<ProviderProps> = ({
-  children,
-}) => {
-  const [colorMode, setColorMode] =
-    useState<ColorMode>("light");
+export const ColorModeProvider: React.FC<ProviderProps> = ({ children }) => {
+  const [colorMode, setColorMode] = useState<ColorMode>("light");
 
   useEffect(() => {
     const localColorMode = getLocalStorage();

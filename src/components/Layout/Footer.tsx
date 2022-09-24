@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "styles/Layout/Footer.module.css";
+import styles from "styles/Layout.module.css";
 import {
   Button,
   chakra,
@@ -19,11 +19,9 @@ const Footer: React.FC = () => {
   return (
     <footer>
       <chakra.div
-        className={styles["footer-container"]}
+        width={"100%"}
         bg={colorMode === "light" ? "gray.50" : "gray.900"}
-        color={
-          colorMode === "light" ? "gray.700" : "gray.200"
-        }
+        color={colorMode === "light" ? "gray.700" : "gray.200"}
       >
         <chakra.div maxW={"5xl"} mx={"auto"} py={10}>
           <chakra.div
@@ -37,24 +35,14 @@ const Footer: React.FC = () => {
             gap={isDesktop ? "4rem" : "2rem"}
             mx={"4rem"}
           >
-            <chakra.div
-              display={"flex"}
-              flexDirection={"column"}
-              gap={6}
-            >
-              <chakra.span
-                className={`${styles["footer-brand"]} Header`}
-              >
+            <chakra.div display={"flex"} flexDirection={"column"} gap={6}>
+              <chakra.span className={`${styles["footer-brand"]}`}>
                 web dev
               </chakra.span>
               <chakra.p fontSize={"sm"}>
                 © 2022 Xander Waugh. All rights reserved
               </chakra.p>
-              <chakra.div
-                display={"flex"}
-                flexDirection={"row"}
-                gap={6}
-              >
+              <chakra.div display={"flex"} flexDirection={"row"} gap={6}>
                 {/* {SocialMedias.map((socialMedia) => (
                   <SocialButton
                     key={socialMedia.label}
@@ -94,25 +82,13 @@ const Footer: React.FC = () => {
               flexDirection={"column"}
               alignItems={"flex-start"}
             >
-              <chakra.p
-                fontWeight={"500"}
-                fontSize={"lg"}
-                mb={2}
-              >
+              <chakra.p fontWeight={"500"} fontSize={"lg"} mb={2}>
                 Stay up to date
               </chakra.p>
-              <chakra.div
-                display={"flex"}
-                flexDirection={"column"}
-              >
+              <chakra.div display={"flex"} flexDirection={"column"}>
                 <form>
-                  <FormControl
-                    id={"email"}
-                    isRequired={true}
-                  >
-                    <FormLabel htmlFor={"email"}>
-                      Email
-                    </FormLabel>
+                  <FormControl id={"email"} isRequired={true}>
+                    <FormLabel htmlFor={"email"}>Email</FormLabel>
                     <Input
                       placeholder={"Your Email"}
                       bg={
@@ -164,10 +140,7 @@ interface LinkSectionLinks {
   }[];
 }
 
-const LinkSection: React.FC<LinkSectionLinks> = ({
-  label,
-  links,
-}) => {
+const LinkSection: React.FC<LinkSectionLinks> = ({ label, links }) => {
   return (
     <chakra.div
       display={"flex"}

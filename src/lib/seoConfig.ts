@@ -1,7 +1,7 @@
 import { NextSeoProps } from "next-seo/lib/types";
 
 const companyTitle = "Company Title";
-const seoDescription = "";
+const seoDescription = "Company Description";
 const siteURL = "https://www.example.com/";
 
 export const SEOConfig: NextSeoProps = {
@@ -42,11 +42,13 @@ export const SEOConfig: NextSeoProps = {
     { name: "HandheldFriendly", content: "true" },
     {
       name: "robots",
-      content: "index, follow",
+      content:
+        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
     },
     {
       name: "googlebot",
-      content: "index, follow",
+      content:
+        "index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1",
     },
     { name: "msapplication-TileColor", content: "#ffffff" },
     { name: "theme-color", content: "#ffffff" },

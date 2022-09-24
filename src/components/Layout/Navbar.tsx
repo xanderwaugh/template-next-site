@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-import styles from "styles/Layout/Navbar.module.css";
+import styles from "styles/Layout.module.css";
 import { NAV_ITEMS } from "lib";
 import { StyledLink, ColorModeSwitch } from "..";
 import { useMediaQuery } from "lib/hooks";
@@ -24,8 +24,7 @@ import { BiMenu, BiX } from "react-icons/bi";
 import { FiTwitter } from "react-icons/fi";
 import { IconBaseProps } from "react-icons/lib";
 
-export const navbarButtonSizes: IconBaseProps["size"] =
-  "28px";
+export const navbarButtonSizes: IconBaseProps["size"] = "28px";
 
 const Navbar: React.FC = () => {
   const { colorMode } = useColorMode();
@@ -47,18 +46,15 @@ const Navbar: React.FC = () => {
         placeContent={"center"}
         alignItems={"center"}
         justifyContent={"space-between"}
-        backgroundColor={
-          colorMode === "light" ? "#fff" : "#121212"
-        }
+        backgroundColor={colorMode === "light" ? "#fff" : "#121212"}
         color={colorMode === "light" ? "black" : "white"}
         pl={"1rem"}
         pr={isDesktop ? "5rem" : "1rem"}
-        className={styles["navContainer"]}
       >
         {/* // * Site Title */}
         <GridItem justifySelf={"left"} textAlign={"center"}>
           <StyledLink href={"/"}>
-            <Link className={`${styles["navTitle"]}`}>
+            <Link className={`${styles["nav-title"]}`}>
               website-{breakPoint}
             </Link>
           </StyledLink>
@@ -87,10 +83,7 @@ const DesktopNav: React.FC = () => {
   return (
     <>
       {NAV_ITEMS.map((nav_item) => (
-        <StyledLink
-          href={nav_item.href}
-          key={nav_item.href}
-        >
+        <StyledLink href={nav_item.href} key={nav_item.href}>
           <chakra.a
             // * Desktop Navbar Item Spacing
             mx={"3rem"}
@@ -120,9 +113,7 @@ const MobileNav: React.FC = () => {
         ref={btnRef}
         onClick={onOpen}
         variant={"ghost"}
-        colorScheme={
-          colorMode === "light" ? "blackAlpha" : undefined
-        }
+        colorScheme={colorMode === "light" ? "blackAlpha" : undefined}
         color={colorMode === "light" ? "black" : "white"}
       >
         <BiMenu size={navbarButtonSizes} />
@@ -147,41 +138,25 @@ const MobileNav: React.FC = () => {
             alignItems={"center"}
           >
             <ColorModeSwitch />
-            <chakra.span
-              className={`${styles["navTitle"]}`}
-            >
+            <chakra.span className={`${styles["nav-title"]}`}>
               website
             </chakra.span>
             <Button
               aria-label={"Close Navigation Menu"}
               onClick={onClose}
               variant={"ghost"}
-              colorScheme={
-                colorMode === "light"
-                  ? "blackAlpha"
-                  : undefined
-              }
-              color={
-                colorMode === "light" ? "black" : "white"
-              }
+              colorScheme={colorMode === "light" ? "blackAlpha" : undefined}
+              color={colorMode === "light" ? "black" : "white"}
             >
               <BiX size={navbarButtonSizes} />
             </Button>
           </DrawerHeader>
 
           <DrawerBody>
-            <VStack
-              justify={"left"}
-              divider={<StackDivider />}
-              w={"100%"}
-            >
+            <VStack justify={"left"} divider={<StackDivider />} w={"100%"}>
               <StackDivider w={"100%"} />
               {NAV_ITEMS.map((nav_item) => (
-                <chakra.div
-                  key={nav_item.href}
-                  w={"100%"}
-                  fontSize={"1.4rem"}
-                >
+                <chakra.div key={nav_item.href} w={"100%"} fontSize={"1.4rem"}>
                   <StyledLink href={nav_item.href}>
                     <chakra.a
                       mr={"2rem"}

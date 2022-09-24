@@ -31,7 +31,7 @@ const theme = extendTheme(
   },
   withDefaultColorScheme({
     colorScheme: "teal",
-  })
+  }),
 );
 
 export default theme;
