@@ -6,19 +6,18 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "next lint",
-    "publish": "yarn next-sitemap --config src/lib/sitemap.js",
+    "sitemap": "yarn next-sitemap --config ./src/utils/sitemap.js",
     "start": "next start"
   },
   "dependencies": {
-    "@chakra-ui/react": "^2.2.8",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
-    "framer-motion": "^7.1.1",
+    "framer-motion": "^7.5.1",
     "next": "^12.2.3",
     "next-seo": "^5.5.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-icons": "^4.4.0",
+    "react-simple-typewriter": "^4.0.2",
+    "react-social-icons": "^5.15.0",
     "sharp": "^0.30.7"
   },
   "devDependencies": {
@@ -27,6 +26,7 @@
     "@types/react-dom": "^18.0.6",
     "@typescript-eslint/eslint-plugin": "^5.32.0",
     "@typescript-eslint/parser": "^5.32.0",
+    "autoprefixer": "^10.4.12",
     "eslint": "^8.21.0",
     "eslint-config-next": "^12.2.3",
     "eslint-config-prettier": "^8.5.0",
@@ -34,7 +34,10 @@
     "eslint-plugin-react": "^7.31.8",
     "eslint-plugin-react-hooks": "^4.6.0",
     "next-sitemap": "^3.1.22",
+    "postcss": "^8.4.17",
     "prettier": "^2.7.1",
+    "tailwind-scrollbar": "^2.0.1",
+    "tailwindcss": "^3.1.8",
     "typescript": "^4.7.4",
     "typescript-plugin-css-modules": "^3.4.0"
   }

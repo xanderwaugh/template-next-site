@@ -20,9 +20,9 @@ module.exports = getConfig({
     domains: [],
     formats: ["image/avif", "image/webp"],
   },
+  poweredByHeader: false,
+  swcMinify: true,
+  optimizeFonts: false,
   trailingSlash: true,
   reactStrictMode: true,
-  poweredByHeader: false,
-  optimizeFonts: false,
-  swcMinify: true,
 });

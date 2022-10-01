@@ -1,7 +1,7 @@
 export interface NavItemProps {
   label: string;
   href: string;
-  subLabel?: string;
+  sub?: string;
   children?: Array<NavItemProps>;
 }
 
@@ -25,15 +25,7 @@ export const getBaseUrl = () => {
   return `http://localhost:${process.env.PORT ?? 3000}`; // Assume Localhost
 };
 
-export const getFormattedDate = () => {
-  const date = new Date();
-  const year = date.getFullYear();
-
-  let month = (1 + date.getMonth()).toString();
-  month = month.length > 1 ? month : "0" + month;
-
-  let day = date.getDate().toString();
-  day = day.length > 1 ? day : "0" + day;
-
-  return month + "/" + day + "/" + year;
-};
+// * Util Hooks
+export { useFavicon } from "./hooks/useFavicon";
+export { useMediaQuery } from "./hooks/useMediaQuery";
+export { useWindowDimensions } from "./hooks/useWindowDimensions";

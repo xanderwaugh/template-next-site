@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-export const useFavicon = (href: string) => {
+interface useFaviconProps {
+  href: string;
+}
+
+export const useFavicon = ({ href }: useFaviconProps) => {
   useEffect(() => {
     const link: HTMLLinkElement =
       document.querySelector("link[rel*='icon']") ||
