@@ -1,9 +1,9 @@
 declare module "*.module.css" {
-  const classNames: { [key: string]: string };
-  export default classNames;
+  const css: { [key: string]: string };
+  export default css;
 }
 
 // declare module "*.module.scss" {
-//   const classNames: { [key: string]: string };
-//   export default classNames;
+//   const css: { [key: string]: string };
+//   export default css;
 // }
