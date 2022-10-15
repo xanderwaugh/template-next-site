@@ -7,8 +7,8 @@ export interface NavItemProps {
 
 export const NAV_ITEMS: Array<NavItemProps> = [
   { label: "Home", href: "/" },
+  { label: "About", href: "#about" },
   { label: "Work", href: "/work/" },
-  { label: "About", href: "/about/" },
   { label: "Contact", href: "/contact/" },
 ];
 

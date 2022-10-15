@@ -5,13 +5,10 @@
       "jsx": true
     },
     "ecmaVersion": "latest",
-    // "ecmaVersion": "2018", // Allows for the parsing of modern ECMAScript features
     "project": "./tsconfig.json",
-    "sourceType": "module" // Allows for the use of imports
+    "sourceType": "module"
   },
-  "plugins": [
-    // "@typescript-eslint",
-  ],
+  "plugins": ["@typescript-eslint"],
   "extends": [
     "plugin:@typescript-eslint/recommended",
     "next/core-web-vitals",
@@ -22,7 +19,7 @@
   "rules": {
     "react/react-in-jsx-scope": "off", // Don't Have To Import React
     "react/prop-types": "off", // No Need To Define PropTypes
-    "prettier/prettier": ["error", {}, { "usePrettierrc": true }]
+    "prettier/prettier": ["warn", {}, { "usePrettierrc": true }]
   },
   "settings": {
     "react": {

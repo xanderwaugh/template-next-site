@@ -5,6 +5,7 @@ import Image from "next/image";
 import Link from "next/link";
 
 import ProfileImage from "../../public/assets/colors.jpg";
+import { NAV_ITEMS } from "~/utils";
 
 export const Hero: React.FC = () => {
   const [text] = useTypewriter({
@@ -33,22 +34,12 @@ export const Hero: React.FC = () => {
         </h1>
       </div>
 
-      <div className="pt-5 z-20">
-        <Link href="#about">
-          <button className="heroButton">About</button>
-        </Link>
-
-        <Link href="#experience">
-          <button className="heroButton">Experience</button>
-        </Link>
-
-        <Link href="#skills">
-          <button className="heroButton">Skills</button>
-        </Link>
-
-        <Link href="#projects">
-          <button className="heroButton">Projects</button>
-        </Link>
+      <div className="pt-5 z-20 flex flex-row items-center justify-center flex-wrap gap-6">
+        {NAV_ITEMS.map((item) => (
+          <Link key={item.label} href={item.href}>
+            <button className="heroButton">{item.label}</button>
+          </Link>
+        ))}
       </div>
     </div>
   );
