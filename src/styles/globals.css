@@ -1,16 +1,32 @@
+/* The base layer is for things like reset rules or default styles applied to plain HTML elements. */
+/* The components layer is for class-based styles that you want to be able to override with utilities. */
+/* The utilities layer is for small, single-purpose classes that should always take precedence over any other styles. */
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: "Inter", sans-serif;
-  font-style: normal;
-  font-weight: 400;
-  src: url("/fonts/Inter-VariableFont_slnt,wght.ttf");
-  font-display: swap;
+@layer base {
+  input[type="file"] {
+    @apply hidden;
+  }
+  /*  body {
+    Custom Scrollbar 
+  }*/
+}
+
+/* iOS Padding */
+.safe-top {
+  padding-top: calc(env(safe-area-inset-top));
+}
+.safe-bottom {
+  padding-bottom: calc(env(safe-area-inset-bottom) + 20px);
 }
 
 @layer components {
+  .page {
+    @apply bg-[rgb(36,36,36)] text-white h-screen snap-y snap-mandatory overflow-y-scroll overflow-x-hidden z-0 scrollbar scrollbar-track-gray-400/20 scrollbar-thumb-[#F7AB0A]/80;
+  }
+
   .heroButton {
     @apply px-6 py-2 border border-[#242424] rounded-full uppercase text-sm tracking-widest text-gray-500 transition-all hover:border-[#F7AB0A]/40 hover:text-[#F7AB0A]/40;
   }

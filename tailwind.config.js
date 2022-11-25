@@ -1,3 +1,6 @@
+/* eslint-disable @typescript-eslint/no-var-requires */
+const { fontFamily } = require("tailwindcss/defaultTheme");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
@@ -7,9 +10,21 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Inter", "sans-serif"],
+        sans: ["var(--font-poppins)", ...fontFamily.sans],
+        body: ["var(--font-poppins)"],
+      },
+      colors: {
+        brand: "#202945",
+      },
+      screens: {
+        xs: { max: "639px" },
       },
     },
   },
-  plugins: [require("tailwind-scrollbar")],
+  plugins: [
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/forms")({
+      strategy: "class",
+    }),
+  ],
 };
