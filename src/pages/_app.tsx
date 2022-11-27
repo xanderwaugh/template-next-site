@@ -33,7 +33,7 @@ const MyApp = (({ Component, pageProps, router }: AppProps) => {
           draggable={false}
           theme="dark"
           toastStyle={{
-            fontFamily: "Poppins",
+            fontFamily: "var(--font-poppins)",
           }}
         />
       </main>
