@@ -1,8 +1,11 @@
 import "~/styles/globals.css";
 import React, { StrictMode } from "react";
-import { AppProps, AppType } from "next/app";
+import { AppType } from "next/app";
 
 import { trpc } from "~/server";
+
+import { Session } from "next-auth";
+import { SessionProvider } from "next-auth/react";
 
 import { DefaultSeo } from "next-seo";
 import { SEOConfig } from "~/utils/seoConfig";
@@ -19,27 +22,33 @@ const poppins = Poppins({
   subsets: ["latin"],
 });
 
-const MyApp = (({ Component, pageProps, router }: AppProps) => {
+const MyApp: AppType<{ session: Session | null }> = ({
+  Component,
+  pageProps,
+  router,
+}) => {
   return (
     <StrictMode>
-      <DefaultSeo {...SEOConfig} />
-      <main className={poppins.className}>
-        <Component key={router.asPath} {...pageProps} />
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={true}
-          pauseOnFocusLoss={false}
-          draggable={false}
-          theme="dark"
-          toastStyle={{
-            fontFamily: "var(--font-poppins)",
-          }}
-        />
-      </main>
+      <SessionProvider session={pageProps.session}>
+        <DefaultSeo {...SEOConfig} />
+        <main className={poppins.className}>
+          <Component key={router.asPath} {...pageProps} />
+          <ToastContainer
+            position="bottom-center"
+            autoClose={5000}
+            hideProgressBar={true}
+            pauseOnFocusLoss={false}
+            draggable={false}
+            theme="dark"
+            toastStyle={{
+              fontFamily: "var(--font-poppins)",
+            }}
+          />
+        </main>
+      </SessionProvider>
     </StrictMode>
   );
-}) as AppType;
+};
 
 // export default MyApp;
 export default trpc.withTRPC(MyApp);

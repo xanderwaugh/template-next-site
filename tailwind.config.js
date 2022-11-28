@@ -13,7 +13,6 @@ module.exports = {
         body: ["var(--font-poppins)"],
       },
       colors: {
-        // brand: "#1C2D61",
         black: "#0E0E0E",
         white: "#FEFEFE",
         brand: {

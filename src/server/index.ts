@@ -6,6 +6,23 @@ import { getBaseUrl } from "~/utils";
 
 // ℹ️ Type-only import:
 import type { AppRouter } from "~/server/router";
+import { QueryClientConfig } from "@tanstack/react-query";
+
+const myQueryClientConf: QueryClientConfig = {
+  defaultOptions: {
+    queries: {
+      refetchInterval: false,
+      refetchOnMount: false,
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity, // * Data is never stale
+      cacheTime: 60 * 1000 * 25, // * Data Cached for 25 minutes
+      retry: 1, // * Retry on Error Once
+      retryDelay: 1000 * 3, // * Retry After 3 Seconds
+      notifyOnChangeProps: ["data", "isLoading"], // * Only Notify on Data or Loading Changes
+    },
+  },
+};
 
 /**
  * Extend `NextPageContext` with meta data that can be picked up by `responseMeta()` when server-side rendering
@@ -62,7 +79,7 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
               } = ctx.req.headers;
               return {
                 ...headers,
-                // "x-ssr": "1",
+                "x-ssr": "1",
               };
             }
             return {};
@@ -72,7 +89,7 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
       /**
        * @link https://react-query.tanstack.com/reference/QueryClient
        */
-      queryClientConfig: {},
+      queryClientConfig: myQueryClientConf,
     };
   },
   /**
