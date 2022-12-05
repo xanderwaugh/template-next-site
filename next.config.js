@@ -16,17 +16,10 @@ function getConfig(config) {
  * @link https://nextjs.org/docs/api-reference/next.config.js/introduction
  */
 module.exports = getConfig({
-  images: {
-    domains: [],
-    formats: ["image/avif", "image/webp"],
-  },
-  i18n: {
-    locales: ["en-US"],
-    defaultLocale: "en-US",
-  },
+  images: { domains: [], formats: ["image/avif", "image/webp"] },
+  i18n: { locales: ["en-US"], defaultLocale: "en-US" },
   poweredByHeader: false,
   swcMinify: true,
-  optimizeFonts: false,
   trailingSlash: true,
   reactStrictMode: true,
 });

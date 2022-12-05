@@ -63,9 +63,7 @@ const NextAuthConfig: NextAuthOptions = {
     maxAge: 60 * 60 * 24 * 31, // 31 days
     updateAge: 60 * 60 * 24, // 1 day
   },
-  pages: {
-    // signIn: "/auth/signin/",
-  },
+  //  pages: { signIn: "/auth/signin/" },
   secret: process.env.NEXTAUTH_SECRET,
 };
 

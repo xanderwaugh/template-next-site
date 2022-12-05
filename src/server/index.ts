@@ -3,23 +3,23 @@ import { createTRPCNext } from "@trpc/next";
 import { NextPageContext } from "next";
 import superjson from "superjson";
 import { getBaseUrl } from "~/utils";
-
-// ℹ️ Type-only import:
-import type { AppRouter } from "~/server/router";
 import { QueryClientConfig } from "@tanstack/react-query";
+
+// !ℹ️ Type-only import:
+import type { AppRouter } from "~/server/router";
 
 const myQueryClientConf: QueryClientConfig = {
   defaultOptions: {
     queries: {
       refetchInterval: false,
-      refetchOnMount: false,
-      refetchOnReconnect: false,
       refetchOnWindowFocus: false,
-      staleTime: Infinity, // * Data is never stale
+      refetchOnReconnect: false,
+      refetchOnMount: true,
+      // staleTime: Infinity, // * Data is never stale
       cacheTime: 60 * 1000 * 25, // * Data Cached for 25 minutes
-      retry: 1, // * Retry on Error Once
-      retryDelay: 1000 * 3, // * Retry After 3 Seconds
-      notifyOnChangeProps: ["data", "isLoading"], // * Only Notify on Data or Loading Changes
+      retry: 1,
+      retryDelay: 1000 * 3,
+      notifyOnChangeProps: ["data", "isLoading", "isSuccess", "isError"],
     },
   },
 };
@@ -86,36 +86,22 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
           },
         }),
       ],
-      /**
-       * @link https://react-query.tanstack.com/reference/QueryClient
-       */
+      // * @link https://react-query.tanstack.com/reference/QueryClient
       queryClientConfig: myQueryClientConf,
     };
   },
-  /**
-   * @link https://trpc.io/docs/ssr
-   */
+  // * @link https://trpc.io/docs/ssr
   ssr: true,
-  /**
-   * Set headers or status code when doing SSR
-   */
+  // * Set headers or status code when doing SSR
   responseMeta(opts) {
     const ctx = opts.ctx as SSRContext;
 
-    if (ctx.status) {
-      // If HTTP status set, propagate that
-      return {
-        status: ctx.status,
-      };
-    }
+    // If HTTP status set, propagate that
+    if (ctx.status) return { status: ctx.status };
 
+    // Propagate http first error from API calls
     const error = opts.clientErrors[0];
-    if (error) {
-      // Propagate http first error from API calls
-      return {
-        status: error.data?.httpStatus ?? 500,
-      };
-    }
+    if (error) return { status: error.data?.httpStatus ?? 500 };
 
     // for app caching with SSR see https://trpc.io/docs/caching
     return {};

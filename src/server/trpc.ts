@@ -5,9 +5,7 @@ import superjson from "superjson";
 export const t = initTRPC.context<Context>().create({
   transformer: superjson,
   errorFormatter({ shape }) {
-    return {
-      message: shape.message,
-    };
+    return { message: shape.message };
   },
 });
 
@@ -17,9 +15,7 @@ const isAdmin = t.middleware(async ({ ctx, next }) => {
     throw new TRPCError({ code: "UNAUTHORIZED" });
   }
   return next({
-    ctx: {
-      user: ctx.session.user,
-    },
+    ctx: { user: ctx.session.user },
   });
 });
 

@@ -6,12 +6,12 @@
 @tailwind utilities;
 
 @layer base {
+  input[type="file"] {
+    @apply hidden;
+  }
   body {
-    /* Custom Scrollbar  */
-    @apply snap-y snap-mandatory overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-offbrand-500/80;
-    position: relative;
-    /* font-family:  */
-    font-weight: 400;
+    /* snap-mandatory */
+    @apply relative font-normal snap-y overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-offbrand-500/80 bg-[rgb(36,36,36)];
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed;
@@ -19,14 +19,21 @@
     -ms-font-feature-settings: "kern" 1;
     font-feature-settings: "kern";
   }
-  input[type="file"] {
-    @apply hidden;
+  html {
+    @apply overflow-x-hidden h-full;
+  }
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  }
+  ::-webkit-scrollbar-thumb {
+    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
+    border-radius: 6px;
   }
 }
 
 @layer components {
   .page {
-    @apply relative bg-[rgb(36,36,36)] text-white min-h-screen h-full z-0 px-2 sm:px-8 md:px-12;
+    @apply relative bg-[rgb(36,36,36)] text-white min-h-screen z-0 px-2 sm:px-8 md:px-12 overflow-x-hidden;
   }
 
   .heading {
@@ -43,7 +50,7 @@
 }
 
 @layer utilities {
-  /* iOS Padding */
+  /* * iOS Padding */
   .safe-top {
     padding-top: calc(env(safe-area-inset-top));
   }

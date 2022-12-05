@@ -27,15 +27,11 @@ module.exports = {
           300: "#E4BD7B",
         },
       },
-      screens: {
-        xs: { max: "639px" },
-      },
+      screens: { xs: { max: "639px" } },
     },
   },
   plugins: [
     require("tailwind-scrollbar"),
-    require("@tailwindcss/forms")({
-      strategy: "class",
-    }),
+    require("@tailwindcss/forms")({ strategy: "class" }),
   ],
 };

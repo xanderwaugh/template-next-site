@@ -32,3 +32,5 @@
 # typescript
 *.tsbuildinfo
 
+# Dev Database
+*.db
