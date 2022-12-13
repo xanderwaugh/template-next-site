@@ -13,6 +13,18 @@ export const NAV_ITEMS: Array<NavItemProps> = [
 ];
 
 // * Util Functions
+// ? Local Storage Prefix
+export const LS_KEY = "bebop-";
+export const getLocalStorageUtil = (key: string) => {
+  const data = localStorage.getItem(LS_KEY + key);
+  return data ?? null;
+};
+export const setLocalStorageUtil = (key: string, value: string) => {
+  localStorage.setItem(LS_KEY + key, value.toString());
+};
+
+export const sleep = async (ms: number) =>
+  await new Promise((r) => setTimeout(r, ms));
 export const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min) + min);
 };
@@ -23,6 +35,19 @@ export const getBaseUrl = () => {
   if (process.env.RENDER_INTERNAL_HOSTNAME)
     return `http://${process.env.RENDER_INTERNAL_HOSTNAME}:${process.env.PORT}`;
   return `http://localhost:${process.env.PORT ?? 3000}`; // Assume Localhost
+};
+
+export const getFormattedDate = () => {
+  const date = new Date();
+  const year = date.getFullYear();
+
+  let month = (1 + date.getMonth()).toString();
+  month = month.length > 1 ? month : "0" + month;
+
+  let day = date.getDate().toString();
+  day = day.length > 1 ? day : "0" + day;
+
+  return month + "/" + day + "/" + year;
 };
 
 interface Omit {

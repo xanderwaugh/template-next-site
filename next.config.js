@@ -18,8 +18,10 @@ function getConfig(config) {
 module.exports = getConfig({
   images: { domains: [], formats: ["image/avif", "image/webp"] },
   i18n: { locales: ["en-US"], defaultLocale: "en-US" },
-  poweredByHeader: false,
-  swcMinify: true,
-  trailingSlash: true,
+  typescript: { tsconfigPath: "tsconfig.json" },
   reactStrictMode: true,
+  cleanDistDir: true,
+  poweredByHeader: false,
+  generateEtags: false,
+  swcMinify: true,
 });

@@ -14,9 +14,7 @@ const NextAuthConfig: NextAuthOptions = {
   callbacks: {
     session({ session, user }) {
       // * Include id and role on session
-      if (session.user) {
-        session.user = { ...session.user, ...user };
-      }
+      if (session.user) session.user = { ...session.user, ...user };
       return session;
     },
   },
@@ -56,7 +54,6 @@ const NextAuthConfig: NextAuthOptions = {
     warn: (code) => {
       console.log(`Warn: ${code}`);
     },
-    // debug: (code) => { console.log(`Debug: ${code}`) },
   },
   session: {
     strategy: "database",

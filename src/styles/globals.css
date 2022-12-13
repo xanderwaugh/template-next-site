@@ -10,8 +10,9 @@
     @apply hidden;
   }
   body {
-    /* snap-mandatory */
-    @apply relative font-normal snap-y overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-offbrand-500/80 bg-[rgb(36,36,36)];
+    /* Custom Scrollbar  */
+    /* @apply snap-y snap-mandatory overflow-y-scroll overflow-x-hidden scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-offbrand-500/80; */
+    @apply relative font-normal min-h-screen scrollbar-thin scrollbar-track-gray-400/20 scrollbar-thumb-zinc-500 bg-brand-600 text-white scroll-smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-rendering: optimizeSpeed;
@@ -19,21 +20,18 @@
     -ms-font-feature-settings: "kern" 1;
     font-feature-settings: "kern";
   }
-  html {
-    @apply overflow-x-hidden h-full;
-  }
-  ::-webkit-scrollbar-track {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+  input[type="file"] {
+    @apply hidden;
   }
   ::-webkit-scrollbar-thumb {
-    box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.5);
-    border-radius: 6px;
+    border-radius: 12px;
+    background: #888;
   }
 }
 
 @layer components {
   .page {
-    @apply relative bg-[rgb(36,36,36)] text-white min-h-screen z-0 px-2 sm:px-8 md:px-12 overflow-x-hidden;
+    @apply relative bg-[rgb(36,36,36)] text-white min-h-screen z-0;
   }
 
   .heading {

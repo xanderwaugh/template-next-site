@@ -49,21 +49,21 @@ const MyApp: AppType<{ session: Session | null }> = ({
 
   return (
     <main className={poppins.className}>
-      <SessionProvider session={pageProps.session}>
-        <DefaultSeo {...SEOConfig} />
+      <DefaultSeo {...SEOConfig} />
 
-        <Header />
+      <Header />
 
-        <AnimatePresence mode="wait" initial={false}>
-          <motion.div
-            key={`page-${router.pathname}`}
-            initial={{ opacity: 0.5, x: -200 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0.5, x: 200 }}
-            transition={{ type: "tween" }}
-            onAnimationComplete={() => window.scrollTo(0, 0)}
-            className="page"
-          >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.div
+          key={`page-${router.pathname}`}
+          initial={{ opacity: 0.5, x: -200 }}
+          animate={{ opacity: 1, x: 0 }}
+          exit={{ opacity: 0.5, x: 200 }}
+          transition={{ type: "tween" }}
+          onAnimationComplete={() => window.scrollTo(0, 0)}
+          className="page"
+        >
+          <SessionProvider session={pageProps.session}>
             <StrictMode>
               {loading ? (
                 <LoadingPage />
@@ -71,19 +71,19 @@ const MyApp: AppType<{ session: Session | null }> = ({
                 <Component key={router.asPath} {...pageProps} />
               )}
             </StrictMode>
-          </motion.div>
-        </AnimatePresence>
+          </SessionProvider>
+        </motion.div>
+      </AnimatePresence>
 
-        <ToastContainer
-          position="bottom-center"
-          autoClose={5000}
-          hideProgressBar={true}
-          pauseOnFocusLoss={false}
-          draggable={false}
-          theme="dark"
-          toastStyle={{ fontFamily: "var(--font-poppins)" }}
-        />
-      </SessionProvider>
+      <ToastContainer
+        position="bottom-center"
+        autoClose={5000}
+        hideProgressBar={true}
+        pauseOnFocusLoss={false}
+        draggable={false}
+        theme="dark"
+        toastStyle={{ fontFamily: "var(--font-poppins)" }}
+      />
     </main>
   );
 };

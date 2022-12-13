@@ -34,3 +34,7 @@
 
 # Dev Database
 *.db
+
+
+public/sw.js
+public/workbox-*.js

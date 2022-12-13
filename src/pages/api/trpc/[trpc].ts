@@ -15,10 +15,15 @@ export default trpcNext.createNextApiHandler({
   batching: { enabled: true },
   // * @link https://trpc.io/docs/caching#api-response-caching
   responseMeta({ paths, type, errors }) {
-    const allPublic = paths && paths.every((path) => path.includes("test"));
+    const allPublic =
+      paths &&
+      paths.every((path) => path.includes("bebop")) &&
+      paths.every((p) => !p.includes("random"));
+
     const allOk = errors.length === 0;
     const isQuery = type === "query";
 
+    // for app caching with SSR see https://trpc.io/docs/caching
     const ONE_DAY_IN_SECONDS = 60 * 60 * 24;
 
     if (allPublic && allOk && isQuery) {

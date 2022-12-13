@@ -5,21 +5,22 @@ import superjson from "superjson";
 import { getBaseUrl } from "~/utils";
 import { QueryClientConfig } from "@tanstack/react-query";
 
-// !ℹ️ Type-only import:
+//*ℹ️ Type-only import:
 import type { AppRouter } from "~/server/router";
 
 const myQueryClientConf: QueryClientConfig = {
   defaultOptions: {
     queries: {
       refetchInterval: false,
-      refetchOnWindowFocus: false,
-      refetchOnReconnect: false,
       refetchOnMount: true,
-      // staleTime: Infinity, // * Data is never stale
+      refetchOnReconnect: false,
+      refetchOnWindowFocus: false,
+      staleTime: Infinity, // * Data is never stale
       cacheTime: 60 * 1000 * 25, // * Data Cached for 25 minutes
-      retry: 1,
-      retryDelay: 1000 * 3,
-      notifyOnChangeProps: ["data", "isLoading", "isSuccess", "isError"],
+      // cacheTime: 0,
+      retry: 1, // * Retry on Error Once
+      retryDelay: 1000 * 3, // * Retry After 3 Seconds
+      notifyOnChangeProps: ["data", "isLoading", "isSuccess", "isError"], // * Only Notify on Data or Loading Changes
     },
   },
 };
@@ -44,7 +45,11 @@ export interface SSRContext extends NextPageContext {
  * A set of strongly-typed React hooks from your `AppRouter` type signature with `createReactQueryHooks`.
  * @link https://trpc.io/docs/react#3-create-trpc-hooks
  */
-export const trpc = createTRPCNext<AppRouter, SSRContext>({
+export const trpc = createTRPCNext<
+  AppRouter,
+  SSRContext,
+  "ExperimentalSuspense" // * Enable Suspense
+>({
   config({ ctx }) {
     /**
      * If you want to use SSR, you need to use the server's full URL
@@ -101,7 +106,8 @@ export const trpc = createTRPCNext<AppRouter, SSRContext>({
 
     // Propagate http first error from API calls
     const error = opts.clientErrors[0];
-    if (error) return { status: error.data?.httpStatus ?? 500 };
+    if (error && error.data?.httpStatus)
+      return { status: error.data?.httpStatus ?? 500 };
 
     // for app caching with SSR see https://trpc.io/docs/caching
     return {};
